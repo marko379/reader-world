@@ -1,0 +1,4 @@
+<form action="{{book.get_absolute_url}}#comm--{{comment.id}}" method="post" class="form">
+	 {% csrf_token %} 
+	<button type="submit" name="comm_idx" value="{{comment.id}}" class="btn btn-outline-warning btn-sm">Edit</button>
+</form>

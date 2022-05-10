@@ -1,0 +1,50 @@
+{% extends 'books/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<div class="singup-title"><h3>Wellcome Sing Up Here</h3></div>
+<div class="main-singup-div">
+<br>
+  <form method="post" enctype="multipart/form-data">
+  	<div class="singup-div">
+
+		{% if messages %}
+    		{% for message in messages %}
+    			<h4 style="color: red">{{message}}</h4>
+    		{% endfor %}
+		{% endif %}
+
+	    {% csrf_token %}
+	    {% for field in form %}
+	    	<h5 style="color: #cc6600">{{ field.label }}</h5>
+	    	{{field}}
+	    	{{field.help_text}}
+	        {% for error in field.errors %}
+	          <h5 style="color: red">{{ error }}</h5>
+	        {% endfor %}
+	    	<hr>
+	    {% endfor %}
+
+	    {% for img_field in user_img_form %}
+	    	<h5 style="color: #cc6600">{{ img_field.label }}</h5>
+	    	{{img_field }}
+	        {% for error in img_field.errors %}
+	          <h6 style="color: red">{{ error }}</h6>
+	        {% endfor %}
+	    {% endfor %}
+
+	    <br>
+	    <br>
+		<div class="d-grid gap-2">
+		  <button class="btn btn-primary" type="submit">Sing Up</button>
+		</div>
+	</div>
+  </form>
+ </div>
+
+
+
+{% endblock %}

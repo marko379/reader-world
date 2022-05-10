@@ -1,0 +1,65 @@
+{% load static %}
+
+{% if user.is_authenticated %}
+	<div class="like-dislike-book">
+		{% if request.user in book.likes.all %}
+			<form action="{% url 'books:system' %}" method="post" >
+				{% csrf_token %}
+				<input type="hidden" name="slug" value="{{ book.slug }}" >
+				<input type="hidden" name="user" value="{{ request.user.id }}">
+				<input type="hidden" name="like" value="like">
+				<button type="submit"  class="btn btn-success btn-sm" data-bs-toggle="tooltip" data-bs-placement="bottom" title="you liked this book">Like</button>
+			</form>
+
+			<form action="{% url 'books:system' %}" method="post">
+				{% csrf_token %}
+				<input type="hidden" name="slug" value="{{ book.slug }}" >
+				<input type="hidden" name="user" value="{{ request.user.id }}">
+				<input type="hidden" name="dislike" value="dislike">
+				<button type="submit"  class="btn btn-outline-danger btn-sm">Dislike</button>
+			</form>
+
+		{% elif request.user in book.dislikes.all %}
+		<!-- DISLIKE SYSTEM -->
+			<form action="{% url 'books:system' %}" method="post" >
+				{% csrf_token %}
+				<input type="hidden" name="slug" value="{{ book.slug }}" >
+				<input type="hidden" name="user" value="{{ request.user.id }}">
+				<input type="hidden" name="like" value="like">
+				<button type="submit"  class="btn btn-outline-success btn-sm">Like</button>
+			</form>
+
+			<form action="{% url 'books:system' %}" method="post">
+				{% csrf_token %}
+				<input type="hidden" name="slug" value="{{ book.slug }}" >
+				<input type="hidden" name="user" value="{{ request.user.id }}">
+				<input type="hidden" name="dislike" value="dislike">
+				<button type="submit"  class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="bottom" title="you disliked this book">Dislike</button>
+			</form>
+		{% else %}
+			<form action="{% url 'books:system' %}" method="post" >
+				{% csrf_token %}
+				<input type="hidden" name="slug" value="{{ book.slug }}" >
+				<input type="hidden" name="user" value="{{ request.user.id }}">
+				<input type="hidden" name="like" value="like">
+				<button type="submit"  class="btn btn-outline-success btn-sm">Like</button>
+			</form>
+
+			<form action="{% url 'books:system' %}" method="post">
+				{% csrf_token %}
+				<input type="hidden" name="slug" value="{{ book.slug }}" >
+				<input type="hidden" name="user" value="{{ request.user.id }}">
+				<input type="hidden" name="dislike" value="dislike">
+				<button type="submit"  class="btn btn-outline-danger btn-sm">Dislike</button>
+			</form>
+		{% endif %}
+	</div>
+{% else %}
+	<div class="like-dislike-book" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Please login or register">
+
+		<button type="submit"  class="btn btn-outline-success btn-sm" disabled>Like</button>
+
+		<button type="submit"  class="btn btn-outline-danger btn-sm" disabled>Dislike</button>
+
+	</div>
+{% endif %}

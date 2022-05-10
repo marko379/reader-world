@@ -1,0 +1,22 @@
+{% load static %}
+<!-- user_stars_per_book_on_coment = Users_stars.objects.filter(book=book) get all user_stars objects associated with book on page  -->
+<!-- so basicly comapre 2 models with same book and same user and then show stars-->
+<div class="">
+	{% for i in user_stars_per_book_on_coment %}
+		{% if i.user.id == comment.user.id  %}
+	    	{% if i.stars < 1  %}
+	    		<img src="{% static 'star/0-stars-big.png' %}" class="q"  alt="My image" width="100">
+	    	{% elif i.stars == 1 %}
+	    		<img src="{% static 'star/1-star-big.png' %}" class="q"  alt="My image" width="100">
+	    	{% elif i.stars == 2 %}
+	    		<img src="{% static 'star/2-stars-small.png' %}" class="q"  alt="My image" width="100">
+	    	{% elif i.stars == 3 %}
+	    		<img src="{% static 'star/3-stars-big.png' %}" class="q"  alt="My image" width="100">
+	    	{% elif i.stars == 4 %}
+	    		<img src="{% static 'star/4-stars-small.png' %}" class="q"  alt="My image" width="100">
+	    	{% elif i.stars == 5 %}
+	    		<img src="{% static 'star/5-stars-big.png' %}" class="q"  alt="My image" width="100">
+	    	{% endif %}
+		{% endif %}
+	{% endfor %}
+</div>

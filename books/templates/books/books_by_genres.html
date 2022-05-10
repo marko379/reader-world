@@ -1,0 +1,66 @@
+{% extends 'books/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="main-div">
+	<br>
+	<h5>{{book.count}} books found</h5>
+	<br>
+	{% for book in book %}
+
+	<div class="book-div">
+
+		<div class="photo-div">
+			<a href="{% url 'books:book' slug=book.slug %}"><img src="{{book.image.url}}" alt="photo" class="img-thumbnail"></a>
+	    </div>
+
+		<div class="info-div">
+
+			<div class="progress">
+			  <div class="progress-bar" role="progressbar" style="width: {{book.likes_dislikes_procentage.0}}%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">{{book.likes_dislikes_procentage.0}}% people like this</div>
+			  <div class="progress-bar bg-danger" role="progressbar" style="width: {{book.likes_dislikes_procentage.1}}%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">{{book.likes_dislikes_procentage.1}}%</div>
+			</div>
+
+			<br>
+
+		    <h5>{{book.title}}</h5>
+		    <h6>By {{book.writter}} </h6>
+		    <h6>Pages: {{book.pages}} </h6>
+		  	<div class="main-div-stars">
+			    <div class="div-stars">
+					{% if book.rating_star_system.total.0 == 0 %}
+						<img src="{% static 'star/0-stars-big.png'%}" class="star-vertical-aling" alt="My image" width="100">
+					{% elif book.rating_star_system.total.0 == 1  or book.rating_star_system.total.0 < 1.3 %}
+						<img src="{% static 'star/1-star-big.png' %}"class="star-vertical-aling"  alt="My image" width="100">
+					{% elif book.rating_star_system.total.0 == 1.3 or book.rating_star_system.total.0 < 1.8 %}
+						<img src="{% static 'star/1.5-stars-small.png' %}"class="star-vertical-aling"alt="My image" width="100">
+					{% elif book.rating_star_system.total.0 == 1.8 or book.rating_star_system.total.0 < 2.3 %}
+						<img src="{% static 'star/2-stars-small.png' %}" class="star-vertical-aling"  alt="My image" width="100">
+					{% elif book.rating_star_system.total.0 == 2.3 or book.rating_star_system.total.0 < 2.8 %}
+						<img src="{% static 'star/2.5-stars-big.png' %}" class="star-vertical-aling"  alt="My image" width="100">
+					{% elif book.rating_star_system.total.0 == 2.8 or book.rating_star_system.total.0 < 3.3 %}
+						<img src="{% static 'star/3-stars-big.png' %}" class="star-vertical-aling"  alt="My image" width="100">
+					{% elif book.rating_star_system.total.0 == 3.3 or book.rating_star_system.total.0 < 3.8 %}
+						<img src="{% static 'star/3.5-stars-big.png' %}" class="star-vertical-aling"  alt="My image" width="100">
+					{% elif book.rating_star_system.total.0 == 3.8 or book.rating_star_system.total.0 < 4.3 %}
+						<img src="{% static 'star/4-stars-small.png' %}" class="star-vertical-aling"  alt="My image" width="100">
+					{% elif book.rating_star_system.total.0 == 4.3 or book.rating_star_system.total.0 < 4.8 %}
+						<img src="{% static 'star/4.5-stars-small.png' %}" class="star-vertical-aling"  alt="My image" width="100">
+					{% elif book.rating_star_system.total.0 > 4.7  %}
+						<img src="{% static 'star/5-stars-big.png' %}" class="star-vertical-aling"  alt="My image" width="100">
+					{% endif %}
+					<div>
+						<h6>{{book.rating_star_system.total.0}}</h6>
+					</div>
+				</div>
+			</div>
+				<a class="download-link-one-genre-search" href="{{book.files}} " download>Download-PDF</a>
+		</div>
+    </div>
+    <hr>
+	{% endfor %}
+</div>
+
+{% endblock %}
+

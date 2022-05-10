@@ -1,0 +1,571 @@
+action="{{book.get_absolute_url}}#comm-{{comment.id}}"
+
+http://127.0.0.1:8000/married-with-zombies-10/?page_num=3?comm_idx=168#comm-168
+
+http://127.0.0.1:8000/married-with-zombies-10/?comm_idx=206#comm-206
+
+http://127.0.0.1:8000/married-with-zombies-10/?page_num=3
+
+http://127.0.0.1:8000/married-with-zombies-10/?page_num=3#comm_idx=206#comm-206
+
+
+  <!-- <link rel="stylesheet" type="text/css" href="{% static 'userapp_css/changePassword.css' %}"> -->
+                <!-- <li><a class="dropdown-item" href="{% url 'users:update_pass' %}">Change Password</a></li> -->
+              <!-- <a class="dropdown-item" href="{% url 'users:update_pass' %}">Forgot password? not sorted</a> -->
+
+http://127.0.0.1:8000/married-with-zombies-10/?page_num=3#comm-168
+
+
+?comm_idx=206#comm-206
+
+comm_idx=168
+
+comm-168
+
+         <button type="submit" name="comm_id" value="{{ comment.id }}" class="btn btn-success btn-sm w-100 d-block">Update</button>
+
+
+
+<form action="{{request.get_full_path}}#comm-{{comment.id}}" method="get" class="form">
+<input type="text" id="fname" name="fname"><br><br>
+  <label for="lname">Last name:</label>
+  <input type="text" id="lname" name="lname"><br><br>
+  <input type="submit" value="Submit">
+  <button type="submit" name="comm_idx" value="{{comment.id}}" class="btn btn-outline-warning btn-sm">Edit</button>
+</form>
+
+
+
+
+
+
+
+
+
+{% block content %}
+
+
+{% for i in page %}
+<h3>{{i.comment}}</h3>
+{% endfor %}
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% extends 'books/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="main-content">
+
+
+{% if messages %}
+  <div class="messages" style="width: 100%;">
+      {% for message in messages %}
+          {% if message.level == 40 %}
+        <div class="alert alert-danger" role="alert">
+          <h4 style="color: blue; margin: auto;" >{{ message }}</h4>
+        </div>
+          {% else %}
+        <div class="alert alert-success" role="alert">
+          <h5 style="color: blue; margin: auto;" >{{ message }}</h5>
+        </div>
+          {% endif %}
+      {% endfor %}
+    </div>
+{% endif %}
+
+  <!-- likes dislikes procentage system -->
+  <div class="progress">
+    <div class="progress-bar" role="progressbar" style="width: {{book.likes_dislikes_procentage.0}}%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">{{book.likes_dislikes_procentage.0}}% people like this</div>
+    <div class="progress-bar bg-danger" role="progressbar" style="width: {{book.likes_dislikes_procentage.1}}%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">{{book.likes_dislikes_procentage.1}}%</div>
+  </div>
+  <br>
+
+
+
+
+  <div class="titlee">
+    <div class="images">
+      <img src="{{book.image.url}}" alt="photo" class="img-thumbnail" width="150">
+      <!-- RATING STAR SYSTEM -->
+      {% include "books/rate_it_stars.html" %}
+    </div>
+
+    <div class="content">
+      <a class="download-link" href="{{book.files}} " download>Download-PDF</a>
+      <h4>{{book.title}}</h4>
+      <h6 class="">By {{book.writter}}</h6>
+
+      <!-- Star rating system imported from star.html -->
+      <div class="star-rating-system">
+        {% include "books/star.html" %}   
+      </div>
+
+
+      <div class="all-genres">
+        <div class="all-genres-inside" >
+          {% for gen in book.genres.all %}
+            <a href="{% url  'books:one_genre' gen=gen.genre %}"><p class="font-monospace">{{gen.genre}}</p></a>&nbsp;&nbsp;
+          {% endfor %}
+        </div>
+      </div>
+
+      <br>
+      <p class="book-info-text">{{book.info}}</p>
+
+    </div>
+
+
+    <div id="carouselExampleInterval" class="carousel slide book-you-might-like" data-bs-ride="carousel">
+      <h5>might like</h5>
+      <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="1">
+            <img class='img-thumbnail image-in-carousel' src="{{book.image.url}}" class="d-block "  >
+          </div>
+          {% for books in return_books_by_ganres %}
+            {% if not books.slug == book.slug %}
+          <div class="carousel-item" data-bs-interval="3500">
+            <a href="{% url 'books:book' slug=books.slug %}"><img class='img-thumbnail image-in-carousel d-block w-100' src="{{books.image.url}}"></a>
+          </div>
+            {% endif %}
+          {% endfor %}
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+
+  <br>
+
+    <!-- screen size 620 -->
+    <p class="book-info-text-620">{{book.info}}</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="carousel-recently-books-screen">
+    <div id="carouselExampleInterval" class="carousel slide book-you-might-like-2" data-bs-ride="carousel">
+      <h6>might like</h6>
+      <div class="carousel-inner">
+          <div class="carousel-item carousel-item-2 active" data-bs-interval="1">
+            <img class='img-thumbnail image-in-carousel' src="{{book.image.url}}" class="d-block "  >
+          </div>
+          {% for books in return_books_by_ganres %}
+            {% if not books.slug == book.slug %}
+          <div class="carousel-item carousel-item-2" data-bs-interval="3500">
+            <a href="{% url 'books:book' slug=books.slug %}"><img class='img-thumbnail image-in-carousel d-block w-100' src="{{books.image.url}}"></a>
+          </div>
+            {% endif %}
+          {% endfor %}
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+  </div>
+
+      <div class="recently-viewed-books-2">
+        <h6 style="text-align: center;">Recently Viewed</h6>  
+        {% for b in recently_viewed_books %}
+          <img src="{{b.image.url}}" alt="photo" class="img-thumbnail recently-viewed-books-2-photos" width="140">
+        {% endfor %}
+              
+      </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              {% if comment.user == request.user and update_form.initial.comm_id == comment.id  %}
+                <form action="{{book.get_absolute_url}}#comm-{{comment.id}}" method="post" >
+                  <div id="comm-{{comment.id}}">
+                    {% csrf_token %}
+                    {{update_form }}
+                    <button type="submit" name="comm_id" value="{{ comment.id }}" class="btn btn-outline-secondary btn-sm">Comment</button>
+                  </div>
+                </form>
+                <br>
+              {% else %}
+              <div class="comment-text-area-div" id="comm-{{comment.id}}">
+                <p class="comment-text-area-paragraf">
+                  {% if comment.comment|linebreaksbr|slice:":300"|length < 300  %}
+                    {{comment.comment|linebreaksbr}}
+                  {% else %}
+                    {{comment.comment|linebreaksbr|slice:":300" }}
+                    <span id="dots">...</span>
+                    <span class="more" id="more">{{comment.comment|linebreaksbr|slice:"300:"}}</span>
+                    <br>
+                    <button id="myBtn" class="btn btn-success btn-sm">Read more</button>
+                  {% endif %}
+
+                </p>
+              </div>
+              {% endif %}
+
+
+
+
+
+
+
+  
+
+    <!-- COMMENT FORM -->
+
+    <div class="comment-form-recently-viewed-books">
+      <div class="comment-form">
+        <form action="{% url 'books:book' slug=book.slug %}" method="post" >
+          {% csrf_token %}
+          {{form }}
+          <div class="d-grid gap-2">
+              <button name="slug" value="{{ book.slug }}" class="btn btn btn-success btn-sm" type="submit">comment</button>
+          </div>
+        </form>
+      </div>
+      <div class="recently-viewed-books">
+        {% for b in recently_viewed_books %}
+          <img src="{{b.image.url}}" alt="photo" class="img-thumbnail" width="100">
+        {% endfor %}
+        <h6 style="text-align: center;">Recently Viewed</h6>        
+      </div>
+
+    </div>
+
+
+  <div class="comment">
+    <!-- how many stars user put?
+         like dislike system
+         first comment will be with most lies dislikes  -->
+    {% for comment in comment %}
+      <hr style="height: 5px; color: black;">
+
+      <div class="main-div-flex-comment">
+
+        <div>
+          {% if comment.user != None %}
+            <img src="{{comment.user.user_photo.user_img.url}}" width="100"  alt="My image" >
+          {% else %}
+            <img src="/media/default_user_img/user_img.png" width="100"  alt="My image" >
+          {% endif %}
+        </div>
+        
+        <div class="comment-div-grid">
+          <div class="item-1">
+            <div class="d-flex">
+              {% if comment.user != None %}
+                <div><h5 style="color: #00802b">{{comment.user}}</h5></div>&nbsp;&nbsp;
+              {% else %}
+                <div><h5 style="color: red">Anonymous user</h5></div>&nbsp;&nbsp;
+              {% endif %}
+              {% include "books/show_stars_on_comment.html" %}
+            </div>
+            <div><h6 style="color: #b30047">{{comment.date_comment_posted}}</h6></div>
+          </div>
+          <div>
+                  {% if comment.user == request.user and update_form.initial.comm_id == comment.id  %}
+                    <form action="{{book.get_absolute_url}}#comm-{{comment.id}}" method="post" >
+                      <div id="comm-{{comment.id}}">
+                        {% csrf_token %}
+                        {{update_form }}
+                        <button type="submit" name="comm_id" value="{{ comment.id }}" class="btn btn-outline-secondary btn-sm">Comment</button>
+                      </div>
+                    </form>
+                    <br>
+                  {% else %}
+                  <div class="comment-text-area-div" id="comm-{{comment.id}}">
+                    <p class="comment-text-area-paragraf">
+                      {% if comment.comment|linebreaksbr|slice:":300"|length < 300  %}
+                        {{comment.comment|linebreaksbr}}
+                      {% else %}
+                        {{comment.comment|linebreaksbr|slice:":300" }}
+                        <span id="dots">...</span>
+                        <span class="more" id="more">{{comment.comment|linebreaksbr|slice:"300:"}}</span>
+                        <br>
+                        <button id="myBtn" class="btn btn-success btn-sm">Read more</button>
+                      {% endif %}
+
+                    </p>
+                  </div>
+                  {% endif %}
+                  <br>
+          </div>
+
+          <div class="item-3">
+
+            {% if request.user.id == comment.user.id %}
+            <div class="d-flex">
+              <div>{% include "books/delete_comm.html" %} </div>&nbsp;&nbsp;
+              <div id="comm-{{comment.id}}">{% include "books/edit.html" %} </div>
+            </div>
+
+            {% else %}
+            <div class="d-flex">
+              <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="user not authenticated">
+                <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Delete</button>
+              </div>&nbsp;&nbsp;
+              <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="user not authenticated">
+                <button type="button" class="btn btn-outline-secondary btn-sm" disabled>Edit</button>
+              </div>
+            </div>
+            {% endif %}
+
+
+            <div class="comment_like_dislike">{% include "books/comment_like_dislike.html" %}</div>
+            <div><h6>{{comment.comment_likes.count}} people like this</h6></div>
+          </div>
+          
+        </div>
+
+      </div>
+    {% endfor %}
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+  
+const dots = document.getElementById("dots");
+const moreText = document.getElementById("more");
+const myBtn = document.querySelectorAll("#myBtn");
+
+myBtn.forEach(function(butt){
+  butt.addEventListener('click',function(e){
+    const grabDots = e.currentTarget.previousElementSibling.previousElementSibling.previousElementSibling
+    const grabSpan = e.currentTarget.previousElementSibling.previousElementSibling
+    grabSpan.classList.toggle('more')
+    e.currentTarget.innerHTML = 'read more'
+    if(!grabSpan.classList.contains('more')){
+      grabDots.style.display = 'none'
+      e.currentTarget.innerHTML = 'read less'
+      console.log(grabDots)
+    }
+  })
+})
+
+</script>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="comment-2">
+
+    {% for comment in comment %}
+      <hr style="height: 5px; color: black;">
+
+      <div class="comment-user-photo-2">
+
+        <div>
+          {% if comment.user != None %}
+            <img src="{{comment.user.user_photo.user_img.url}}" width="100"  alt="My image" >
+          {% else %}
+            <img src="/media/default_user_img/user_img.png" width="100"  alt="My image" >
+          {% endif %}
+        </div>
+        
+        <div class="comment-div-grid">
+          <div class="item-1">
+            <div class="d-flex">
+              {% if comment.user != None %}
+                <div><h5 style="color: #00802b">{{comment.user}}</h5></div>&nbsp;&nbsp;
+              {% else %}
+                <div><h5 style="color: red">Anonymous user</h5></div>&nbsp;&nbsp;
+              {% endif %}
+              {% include "books/show_stars_on_comment.html" %}
+            </div>
+            <div><h6 style="color: #b30047">{{comment.date_comment_posted}}</h6></div>
+          </div>
+        </div>
+      </div>
+
+
+          <div class="comment-content-small-screen">
+                  {% if comment.user == request.user and update_form.initial.comm_id == comment.id  %}
+                    <form action="{{book.get_absolute_url}}#comm-{{comment.id}}" method="post" >
+                      <div id="comm-{{comment.id}}">
+                        {% csrf_token %}
+                        {{update_form }}
+                        <button type="submit" name="comm_id" value="{{ comment.id }}" class="btn btn-outline-secondary btn-sm">Comment</button>
+                      </div>
+                    </form>
+                    <br>
+                  {% else %}
+                  <div class="comment-text-area-div" id="comm-{{comment.id}}">
+                    <p class="comment-text-area-paragraf-2">
+                      {% if comment.comment|linebreaksbr|slice:":300"|length < 300  %}
+                        {{comment.comment|linebreaksbr}}
+                      {% else %}
+                        {{comment.comment|linebreaksbr|slice:":300" }}
+                        <span id="dots">...</span>
+                        <span class="more" id="more">{{comment.comment|linebreaksbr|slice:"300:"}}</span>
+                        <br>
+                        <button id="myBtn" class="btn btn-success btn-sm">Read more</button>
+                      {% endif %}
+
+                    </p>
+                  </div>
+                  {% endif %}
+                  <br>
+          </div>
+
+          <div class="item-3">
+
+            {% if request.user.id == comment.user.id %}
+            <div class="d-flex">
+              <div>{% include "books/delete_comm.html" %} </div>&nbsp;&nbsp;
+              <div id="comm-{{comment.id}}">{% include "books/edit.html" %} </div>
+            </div>
+
+            {% else %}
+            <div class="d-flex">
+              <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="user not authenticated">
+                <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Delete</button>
+              </div>&nbsp;&nbsp;
+              <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="user not authenticated">
+                <button type="button" class="btn btn-outline-secondary btn-sm" disabled>Edit</button>
+              </div>
+            </div>
+            {% endif %}
+
+
+            <div class="comment_like_dislike">{% include "books/comment_like_dislike.html" %}</div>
+            <div><h6>{{comment.comment_likes.count}} people like this</h6></div>
+          </div>
+          
+        </div>
+
+      
+    {% endfor %}
+
+  </div>

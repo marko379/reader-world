@@ -1,0 +1,68 @@
+{% extends 'books/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+
+<div class="profile-main-div">
+	{% if messages %}
+		<div class="messages">
+		    {% for message in messages %}
+	        	{% if message.level == 40 %}
+					<div class="alert alert-danger" role="alert">
+					  <h4 style="color: blue; margin: auto;" >{{ message }}</h4>
+					</div>
+	        	{% else %}
+					<div class="alert alert-success" role="alert">
+					  <h5 style="color: blue; margin: auto;" >{{ message }}</h5>
+					</div>
+	       		{% endif %}
+		    {% endfor %}
+	    </div>
+	{% endif %}
+	<br>
+	<h4 style="text-align: center; color: green;">Hello {{user.username}}</h4>
+	<br>
+
+	<img src="{{user.user_photo.user_img.url}}" alt="photo" class="img-thumbnail" width="200">
+	<br>
+
+
+	<form action="{% url 'users:edit_url' %}" method="post" enctype="multipart/form-data" style="width: 100%; ">
+		{% csrf_token %}
+		<div>
+			<h4>Update your first name</h4>
+			{{update_form2.first_name}}
+		</div>
+		<hr>
+		<div>
+			<h4>Update your last name</h4>
+			{{update_form2.last_name}}
+		</div>
+		<hr>
+		<div>
+			<h4>Update your email name</h4>
+			{{update_form2.email}}
+		</div>
+		<hr>
+		<div>
+			<h4>Update your photo</h4>
+			{{photo_form.user_img}}
+			{{request.user.user_photo.user_img.url}}
+		</div>
+		<br>
+		<div class="d-grid gap-2">
+			<button class="btn btn btn-success btn-lg" type="submit">Update</button>
+		</div>
+	</form>
+	<br>
+
+	<form action="{% url 'users:delete-user' %}" method="post" style="width: 100%; ">
+			{% csrf_token %}
+			<div class="d-grid gap-2">
+				<button class="btn btn btn-danger btn-lg" type="submit">delete-profile</button>
+			</div>
+		</form>
+</div>
+{% endblock %}

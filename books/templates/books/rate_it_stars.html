@@ -1,0 +1,66 @@
+{% load static %}
+<img src="">
+
+<!-- here are 5 icons of stars, each star icon has a value ,that is sent to url then to rating_star_system.views -->
+<!-- this form is cheking if user is logged in and if user had rated the book -->
+{% if user.is_authenticated and user_star_book.stars > 0 %}
+<form method="post" action="{% url 'books:rating_star' book_id=book.id %}" >
+	<div class="btn-group me-2 button-stars lll" role="group" aria-label="First group">
+		{% csrf_token %}
+	    <button type="submit" class="btn btn-outline-warning btn-sm" name="num" value="1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="1 star"><img src="{% static 'icons/index.png' %}" class="star"  alt="My image" width="17"></button>
+	    <button type="submit" class="btn btn-outline-warning btn-sm" name="num" value="2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="2 stars"><img src="{% static 'icons/index.png' %}" class="star"  alt="My image" width="17"></button>
+	    <button type="submit" class="btn btn-outline-warning btn-sm" name="num" value="3" data-bs-toggle="tooltip" data-bs-placement="bottom" title="3 stars"><img src="{% static 'icons/index.png' %}" class="star"  alt="My image" width="17"></button>
+	    <button type="submit" class="btn btn-outline-warning btn-sm" name="num" value="4" data-bs-toggle="tooltip" data-bs-placement="bottom" title="4 stars"><img src="{% static 'icons/index.png' %}" class="star"  alt="My image" width="17"></button>
+	    <button type="submit" class="btn btn-outline-warning btn-sm" name="num" value="5" data-bs-toggle="tooltip" data-bs-placement="bottom" title="5 stars"><img src="{% static 'icons/index.png' %}" class="star"  alt="My image" width="17"></button>
+	</div>
+	<h6 style="text-align: center; margin-top: 10px;">You rated it {{user_star_book.stars}}  <i class="bi bi-star-fill"></i></h6>
+
+	
+</form>
+
+
+
+<!-- this form its just un-rate button, to delete your rate   -->
+<form method="post" action="{% url 'books:user_stars_delete' slug=book.slug user_id=request.user.id %}">
+	{% csrf_token %}
+
+	<div class="d-grid gap-2 ">
+	  <button class="btn btn-outline-danger btn-sm" type="submit"><h6>un-rate</h6></button>
+	</div>
+
+</form>
+
+
+
+<!-- this form is checking  if user is looged but did not rate it -->
+{% elif user.is_authenticated %}
+<form method="post" action="{% url 'books:rating_star' book_id=book.id %}" >
+	<div class="btn-group me-2 button-stars lll" role="group" aria-label="First group">
+		{% csrf_token %}
+	    <button type="submit" class="btn btn-outline-warning btn-sm" name="num" value="1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="1 star"><img src="{% static 'icons/index.png' %}" class="star"  alt="My image" width="17"></button>
+	    <button type="submit" class="btn btn-outline-warning btn-sm" name="num" value="2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="2 stars"><img src="{% static 'icons/index.png' %}" class="star"  alt="My image" width="17"></button>
+	    <button type="submit" class="btn btn-outline-warning btn-sm" name="num" value="3" data-bs-toggle="tooltip" data-bs-placement="bottom" title="3 stars"><img src="{% static 'icons/index.png' %}" class="star"  alt="My image" width="17"></button>
+	    <button type="submit" class="btn btn-outline-warning btn-sm" name="num" value="4" data-bs-toggle="tooltip" data-bs-placement="bottom" title="4 stars"><img src="{% static 'icons/index.png' %}" class="star"  alt="My image" width="17"></button>
+	    <button type="submit" class="btn btn-outline-warning btn-sm" name="num" value="5" data-bs-toggle="tooltip" data-bs-placement="bottom" title="5 stars"><img src="{% static 'icons/index.png' %}" class="star"  alt="My image" width="17"></button>
+	</div>
+	<h6 style="text-align: center;">Rate it!</h6>
+	
+</form>
+
+
+<!-- this form to see if user is not logged in -->
+{% else %}
+<div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Please login or register">
+	<h6 style="text-align: center;">To rate a book please login!</h6>
+	<div class="btn-group me-2 button-stars lll" role="group" aria-label="First group">
+	    <button type="submit" class="btn btn-outline-warning btn-sm" name="num" value="1"  disabled><img src="{% static 'icons/index.png' %}" class="star"  alt="My image" width="17"></button>
+	    <button type="submit" class="btn btn-outline-warning btn-sm" name="num" value="2"  disabled><img src="{% static 'icons/index.png' %}" class="star"  alt="My image" width="17"></button>
+	    <button type="submit" class="btn btn-outline-warning btn-sm" name="num" value="3" disabled><img src="{% static 'icons/index.png' %}" class="star"  alt="My image" width="17"></button>
+	    <button type="submit" class="btn btn-outline-warning btn-sm" name="num" value="4" disabled><img src="{% static 'icons/index.png' %}" class="star"  alt="My image" width="17"></button>
+	    <button type="submit" class="btn btn-outline-warning btn-sm" name="num" value="5" disabled><img src="{% static 'icons/index.png' %}" class="star"  alt="My image" width="17"></button>
+	</div>
+</div>
+
+
+{% endif %}
+

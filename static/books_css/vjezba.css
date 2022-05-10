@@ -1,0 +1,26 @@
+*{
+  padding:0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  height: 10000px;
+  background-color: green;
+}
+
+.btn {
+  text-decoration: none;
+  color: black;
+  width: 100px;
+  padding: 20px;
+  background: yellow;
+}
+
+.post{
+  width: 400px;
+  height: 850px;
+  background-color: blue;
+  margin-bottom: 10px;
+  border: 1px solid white;
+}
