@@ -1,0 +1,410 @@
+
+.info{
+
+	max-width: 500px;
+	border: double;
+	margin: auto;
+	margin-top: 20px;
+
+}
+
+.messages{
+	width: 65%;
+	margin: auto;
+	margin-top: 5px;
+}
+
+.image{
+	/*border: solid;*/
+}
+
+.info-text{
+	width: 65%;
+	margin:auto;
+	/*text-align: center;*/
+	border: dotted;
+}
+
+p{
+	text-align: justify;
+}
+
+.download-title{
+	margin: auto;
+	width: 65%;
+	border: double;
+	margin-top: 20px;
+	background-color: rgb(244, 241, 234);
+}
+h1{
+	text-align: center;
+
+}
+
+
+.main-download{
+	display: flex;
+    justify-content: flex-end;
+	width: 70%;
+	margin:auto;
+	margin-top: 20px;
+	/*border: dashed red;*/
+}
+
+.book{
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.genres{
+	/*border: dashed;*/
+	min-width: 25%;
+/*	text-align: center;*/
+
+}
+
+.genres-column{
+	display: none;
+}
+
+.content-genres{
+	margin:auto;
+	/*border: dotted;*/
+	/*text-align: center;*/
+	/*width: 20%;*/
+}
+
+.image-naslovna{
+	min-width: 300px;
+}
+
+
+
+.data-main-div{
+	display: flex;
+	justify-content: space-between;
+}
+
+
+.data-title-writer{
+	display: flex;
+	justify-content: space-between;
+}
+
+img{
+	 vertical-align: text-bottom;
+	 /*border: dashed;*/
+}
+
+
+
+.data-writter{
+	color: red;
+}
+
+.data-stars-rate-num{
+	display: flex;
+}
+
+.exe{
+	border: solid;
+	margin: 10px;
+
+}
+
+.exe2{
+	/*border: solid red;*/
+}
+
+.download-books{
+	display: flex;
+	/*align-content: space-around;*/
+	 flex-wrap: wrap;
+
+
+	margin: auto;
+	width: 100%;
+	/*border: dotted green;*/
+
+
+}
+
+.img-front-page{
+	border: solid;
+	margin: 5px;
+  width: 135px;
+}
+
+
+@media screen and (max-width: 852px) {
+  .main-download {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: auto;
+    border: dotted;
+    width: 100%;
+  }
+  .download-books{
+	display: flex;
+	/*align-content: space-around;*/
+	 flex-wrap: wrap;
+	 border: solid;
+	 justify-content: space-around;
+
+  }
+  .genres-column{
+  	display: inline;
+  	margin: auto;
+  	width: 80%;
+
+  }
+
+  .form-check-inline {
+  	margin: auto;
+  	width: 45%;	
+  }
+  .genres{
+  	display: none;
+  }
+  .download-title{
+  	width: 100%;
+  }
+
+.img-front-page{
+	/*border: dotted red;*/
+	/*margin-top: 20px;*/
+	/*margin-left: 20px;*/
+}
+
+}
+
+
+@media screen and (max-width: 737px) {
+  .main-download {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: auto;
+    border: dotted;
+    width: 100%;
+  }
+  .download-books{
+	display: flex;
+	/*align-content: space-around;*/
+	 flex-wrap: wrap;
+	 border: solid;
+	 justify-content: space-around;
+
+  }
+  .genres-column{
+  	display: inline;
+  	margin: auto;
+  	width: 80%;
+
+  }
+
+  .form-check-inline {
+  	margin: auto;
+  	width: 45%;	
+  }
+  .genres{
+  	display: none;
+  }
+  .download-title{
+  	width: 100%;
+  }
+
+.img-front-page{
+	/*border: dotted red;*/
+	/*margin-top: 20px;*/
+	/*margin-left: 20px;*/
+}
+
+}
+
+
+
+@media screen and (max-width: 671px) {
+  .main-download {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: auto;
+    border: dotted;
+    width: 100%;
+  }
+  .download-books{
+	display: flex;
+	/*align-content: space-around;*/
+	 flex-wrap: wrap;
+	 border: solid;
+	 justify-content: flex-start;
+
+  }
+  .genres-column{
+  	display: inline;
+  	margin: auto;
+  	width: 80%;
+
+  }
+
+  .form-check-inline {
+  	margin: auto;
+  	width: 45%;	
+  }
+  .genres{
+  	display: none;
+  }
+  .download-title{
+  	width: 100%;
+  }
+
+.img-front-page{
+	/*border: dotted red;*/
+	/*margin-top: 20px;*/
+	/*margin-left: 20px;*/
+}
+
+}
+
+@media screen and (max-width: 611px) {
+  .main-download {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: auto;
+    border: dotted;
+    width: 100%;
+  }
+  .download-books{
+	display: flex;
+	/*align-content: space-around;*/
+	 flex-wrap: wrap;
+	 border: solid;
+	 justify-content: space-around;
+  }
+  .genres-column{
+  	display: inline;
+  	margin: auto;
+  	width: 80%;
+
+  }
+
+  .form-check-inline {
+  	margin: auto;
+  	width: 45%;	
+  }
+  .genres{
+  	display: none;
+  }
+  .download-title{
+  	width: 100%;
+  }
+
+.img-front-page{
+	/*border: dotted red;*/
+	/*margin-top: 20px;*/
+	/*margin-left: 20px;*/
+}
+
+}
+
+
+@media screen and (max-width: 464px) {
+  .main-download {
+    display: flex;
+    flex-direction: column;
+    /*justify-content: flex-end;*/
+    margin: auto;
+    /*border: dotted;*/
+    width: 100%;
+  }
+  .download-books{
+	display: flex;
+	/*align-content: space-around;*/
+	 flex-wrap: wrap;
+
+	 justify-content: center;
+
+  }
+  .genres-column{
+
+  	margin: auto;
+  	width: 90%;
+
+  }
+  .genres{
+  	display: none;
+  }
+  .form-check-inline {
+  	margin: auto;
+  	width: 45%;	
+  	/*border: dashed;*/
+
+  }
+  .download-title{
+  	width: 100%;
+  }
+
+
+
+.img-front-page{
+	border: dotted;
+	margin-top: 20px;
+	/*margin-left: 20px;*/
+}
+
+}
+
+
+@media screen and (max-width: 397px) {
+  .main-download {
+    display: flex;
+    flex-direction: column;
+    /*justify-content: flex-end;*/
+    margin: auto;
+    /*border: dotted;*/
+    width: 100%;
+  }
+  .download-books{
+	display: flex;
+	justify-content: flex-start;
+	/*align-content: space-around;*/
+	 flex-wrap: wrap;
+	 width: 100%;
+
+	/* justify-content: center;*/
+
+  }
+  .genres-column{
+
+  	margin: auto;
+  	width: 90%;
+
+  }
+  .genres{
+  	display: none;
+  }
+  .form-check-inline {
+  	margin: auto;
+  	width: 45%;	
+  	/*border: dashed;*/
+
+  }
+  .download-title{
+  	width: 100%;
+  }
+  .img-front-page{
+  	width: 140px;
+  }
+
+
+.img-front-page{
+	border: dotted red;
+	/*margin-top: 20px;*/
+
+}
+
+}
