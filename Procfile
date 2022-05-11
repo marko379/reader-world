@@ -1,1 +1,1 @@
-web: guniconr forum4.wsgi
+web: gunicorn forum4.wsgi
