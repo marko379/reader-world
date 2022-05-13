@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +27,7 @@ SECRET_KEY = ')u0&ahpveo4@jr3#=qp&gws*%!92pu9)0^43jfwf(0744nipvb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1' ,'reader-world.herokuapp.com']
 
 
 # Application definition
@@ -148,3 +149,5 @@ MEDIA_URL = '/media/'
 # CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 # CRISPY_TEMPLATE_PACK = 'uni_form'
 # CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+django_heroku.settings(locals())
