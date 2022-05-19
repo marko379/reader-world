@@ -164,3 +164,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = os.environ.get('HOST_EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('HOST_EMAIL_PASSWORD')
 EMAIL_PORT = 587
+
