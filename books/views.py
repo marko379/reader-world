@@ -38,7 +38,7 @@ def front(request):
 	username = None
 	if( 'form_message' in request.session):
 		username = request.session['username']
-		messages.success(request, 'Wellcome {}! Your account was created successfully! You can login now!'.format(username))
+		messages.success(request, 'Wellcome {}! Before you CAN login you need to confirm your email address! please go to your email and conirm your addres'.format(username))
 		request.session.clear()
 	if ( 'session' in request.session):
 		username = request.session['username']

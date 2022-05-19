@@ -1,7 +1,6 @@
 {% load static %}
 
 <form method="post" action="{% url 'books:comm_delete' comm_id=comment.id book_id=book.id %}" >
-		{% csrf_token %}
-	    <button type="submit" class="btn btn btn-danger btn-sm">delete</button>
- 
+	{% csrf_token %}
+	<button type="submit" class="btn btn btn-danger btn-sm">delete</button>
 </form>

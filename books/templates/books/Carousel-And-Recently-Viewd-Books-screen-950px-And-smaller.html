@@ -1,0 +1,34 @@
+  <div class="CarouselAndRecentlyViewdBooks-screen950pxAndLess">
+      <div id="carouselExampleInterval" class="carousel slide book-you-might-like-2" data-bs-ride="carousel">
+      <h6 style="text-align: center;">like?</h6>
+        <div class="carousel-inner carousel-inner-2">
+            <div class="carousel-item carousel-item-2 active" data-bs-interval="1">
+              <img class='img-thumbnail image-in-carousel' src="{{book.image.url}}" class="d-block "  >
+            </div>
+            {% for books in return_books_by_ganres %}
+              {% if not books.slug == book.slug %}
+            <div class="carousel-item carousel-item-2" data-bs-interval="3500">
+              <a href="{% url 'books:book' slug=books.slug %}"><img class='img-thumbnail image-in-carousel d-block' src="{{books.image.url}}"></a>
+            </div>
+              {% endif %}
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+      <div>
+        <h6 style="text-align: center;">recently viewed</h6>
+        <div class="recently-viewed-books-2">
+          {% for b in recently_viewed_books %}
+            <a href="{% url 'books:book' slug=b.slug %}"><img src="{{b.image.url}}" alt="photo" class=" img-thumbnail recently-viewed-books-2-photos" width="140"></a>
+          {% endfor %}
+                
+        </div>
+      </div>
+  </div>

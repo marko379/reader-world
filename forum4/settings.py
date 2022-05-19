@@ -26,7 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ')u0&ahpveo4@jr3#=qp&gws*%!92pu9)0^43jfwf(0744nipvb'
+
+SECRET_KEY = os.environ.get('db_pass')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -45,7 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'crispy_forms',
+    'crispy_forms',
 
 ]
 
@@ -64,7 +66,8 @@ ROOT_URLCONF = 'forum4.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        # 'DIRS': ['templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -143,15 +146,21 @@ STATICFILES_DIRS = [
     # '/var/www/static/',
 ]
 
-# LOGIN_REDIRECT_URL = 'books:front'
-# LOGOUT_REDIRECT_URL = 'books:front'
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
 
-# MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
-# CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
-# CRISPY_TEMPLATE_PACK = 'uni_form'
-# CRISPY_TEMPLATE_PACK = "bootstrap4"
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 
 django_heroku.settings(locals())
+
+
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True  
+EMAIL_HOST = 'smtp.gmail.com'  
+EMAIL_HOST_USER = os.environ.get('HOST_EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('HOST_EMAIL_PASSWORD')
+EMAIL_PORT = 587

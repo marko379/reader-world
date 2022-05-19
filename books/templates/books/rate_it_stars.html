@@ -13,12 +13,8 @@
 	    <button type="submit" class="btn btn-outline-warning btn-sm" name="num" value="4" data-bs-toggle="tooltip" data-bs-placement="bottom" title="4 stars"><img src="{% static 'icons/index.png' %}" class="star"  alt="My image" width="17"></button>
 	    <button type="submit" class="btn btn-outline-warning btn-sm" name="num" value="5" data-bs-toggle="tooltip" data-bs-placement="bottom" title="5 stars"><img src="{% static 'icons/index.png' %}" class="star"  alt="My image" width="17"></button>
 	</div>
-	<h6 style="text-align: center; margin-top: 10px;">You rated it {{user_star_book.stars}}  <i class="bi bi-star-fill"></i></h6>
-
-	
+	<h6 style="text-align: center; margin-top: 10px;">You rated it {{user_star_book.stars}}  <i class="bi bi-star-fill"></i></h6>	
 </form>
-
-
 
 <!-- this form its just un-rate button, to delete your rate   -->
 <form method="post" action="{% url 'books:user_stars_delete' slug=book.slug user_id=request.user.id %}">

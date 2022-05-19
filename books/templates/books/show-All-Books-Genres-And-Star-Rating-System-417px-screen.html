@@ -1,0 +1,13 @@
+<div class="star-rating-system-screen-417px">
+  <!-- rating_star_system.total.1 = return total num of all users -->
+  <div class="star-rating-system-inside-417" style="color: green; margin: 5px;"><p>{{rating_star_system.total.1}}-ratings</p></div>
+  <div class="star-rating-system-inside-417" style="color: green; margin: 5px;"><p>{{comment.count}}-comments</p></div> 
+</div>
+<!-- screen-417px -->
+<div class="all-genres-2">
+  <div class="all-genres-inside" >
+    {% for gen in book.genres.all %}
+      <a href="{% url  'books:one_genre' gen=gen.genre %}"><p class="font-monospace">{{gen.genre}}</p></a>&nbsp;&nbsp;
+    {% endfor %}
+  </div>
+</div>

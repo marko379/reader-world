@@ -22,15 +22,26 @@ from django.conf.urls.static import static
 from .import views
 
 
+
 app_name = 'forum4'
+
 
 urlpatterns = [
     path('',views.homito, name='h'),
     path('admin/', admin.site.urls),
     path('reader-world/', include('books.urls')),
     path('accounts/', include('users.urls')),
+    
 
+    path('password-reset/', auth_views.PasswordResetView.as_view(template_name='users/password_reset.html'),name='pass-reset'),
+
+    path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='users/password_reset_done.html'),name='password_reset_done'),
+
+    path('password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='users/pass_reset_confirm.html'),name='password_reset_confirm'),
+
+    path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='users/pass_reset_complete.html'),name='password_reset_complete'),
 ]
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

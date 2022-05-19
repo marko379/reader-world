@@ -1,0 +1,23 @@
+<div id="carouselExampleInterval" class="carousel slide book-you-might-like" data-bs-ride="carousel">
+  <h5>might like</h5>
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="1">
+      <img class='img-thumbnail image-in-carousel' src="{{book.image.url}}" class="d-block "  >
+    </div>
+    {% for books in return_books_by_ganres %}
+      {% if not books.slug == book.slug %}
+        <div class="carousel-item" data-bs-interval="3500">
+          <a href="{% url 'books:book' slug=books.slug %}"><img class='img-thumbnail image-in-carousel d-block w-100' src="{{books.image.url}}"></a>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>

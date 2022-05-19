@@ -2,7 +2,7 @@
 
 
 {% if user.is_authenticated %}
-		{% if request.user in comment.comment_likes.all %}
+	{% if request.user in comment.comment_likes.all %}
 		<form action="{% url 'books:comment_system' %}" method="post">
 			{% csrf_token %}
 			<input type="hidden" name="slug" value="{{ book.slug }}" >
@@ -12,60 +12,57 @@
 			<button type="submit"  class="btn btn-success btn-sm"  data-bs-toggle="tooltip"  title="you like this comment">Like</button>
 		</form>
 
-			<form action="{% url 'books:comment_system' %}" method="post">
-				{% csrf_token %}
-				<input type="hidden" name="slug" value="{{ book.slug }}" >
-				<input type="hidden" name="comment_id" value="{{ comment.id }}" >
-				<input type="hidden" name="user" value="{{ request.user.id }}">
-				<input type="hidden" name="dislike" value="dislike">
-				<button type="submit"  class="btn btn-outline-danger btn-sm">Dislike</button>
-			</form>
+		<form action="{% url 'books:comment_system' %}" method="post">
+			{% csrf_token %}
+			<input type="hidden" name="slug" value="{{ book.slug }}" >
+			<input type="hidden" name="comment_id" value="{{ comment.id }}" >
+			<input type="hidden" name="user" value="{{ request.user.id }}">
+			<input type="hidden" name="dislike" value="dislike">
+			<button type="submit"  class="btn btn-outline-danger btn-sm">Dislike</button>
+		</form>
 
-		{% elif request.user in comment.comment_dislikes.all %}
-		<!-- DISLIKE SYSTEM -->
-			<form action="{% url 'books:comment_system' %}" method="post" >
-				{% csrf_token %}
-				<input type="hidden" name="slug" value="{{ book.slug }}" >
-				<input type="hidden" name="user" value="{{ request.user.id }}">
-				<input type="hidden" name="comment_id" value="{{ comment.id }}" >
-				<input type="hidden" name="like" value="like">
-				<button type="submit"  class="btn btn-outline-success btn-sm">Like</button>
-			</form>
+	{% elif request.user in comment.comment_dislikes.all %}
+	<!-- DISLIKE SYSTEM -->
+		<form action="{% url 'books:comment_system' %}" method="post" >
+			{% csrf_token %}
+			<input type="hidden" name="slug" value="{{ book.slug }}" >
+			<input type="hidden" name="user" value="{{ request.user.id }}">
+			<input type="hidden" name="comment_id" value="{{ comment.id }}" >
+			<input type="hidden" name="like" value="like">
+			<button type="submit"  class="btn btn-outline-success btn-sm">Like</button>
+		</form>
 
-			<form action="{% url 'books:comment_system' %}" method="post">
-				{% csrf_token %}
-				<input type="hidden" name="slug" value="{{ book.slug }}" >
-				<input type="hidden" name="user" value="{{ request.user.id }}">
-				<input type="hidden" name="comment_id" value="{{ comment.id }}" >
-				<input type="hidden" name="dislike" value="dislike">
-				<button type="submit"  class="btn btn-danger btn-sm" data-bs-toggle="tooltip"  title="you dislike this comment">Dislike</button>
-			</form>
-		{% else %}
-			<form action="{% url 'books:comment_system' %}" method="post" >
-				{% csrf_token %}
-				<input type="hidden" name="slug" value="{{ book.slug }}" >
-				<input type="hidden" name="user" value="{{ request.user.id }}">
-				<input type="hidden" name="comment_id" value="{{ comment.id }}" >
-				<input type="hidden" name="like" value="like">
-				<button type="submit"  class="btn btn-outline-success btn-sm">Like</button>
-			</form>
+		<form action="{% url 'books:comment_system' %}" method="post">
+			{% csrf_token %}
+			<input type="hidden" name="slug" value="{{ book.slug }}" >
+			<input type="hidden" name="user" value="{{ request.user.id }}">
+			<input type="hidden" name="comment_id" value="{{ comment.id }}" >
+			<input type="hidden" name="dislike" value="dislike">
+			<button type="submit"  class="btn btn-danger btn-sm" data-bs-toggle="tooltip"  title="you dislike this comment">Dislike</button>
+		</form>
+	{% else %}
+		<form action="{% url 'books:comment_system' %}" method="post" >
+			{% csrf_token %}
+			<input type="hidden" name="slug" value="{{ book.slug }}" >
+			<input type="hidden" name="user" value="{{ request.user.id }}">
+			<input type="hidden" name="comment_id" value="{{ comment.id }}" >
+			<input type="hidden" name="like" value="like">
+			<button type="submit"  class="btn btn-outline-success btn-sm">Like</button>
+		</form>
 
-			<form action="{% url 'books:comment_system' %}" method="post">
-				{% csrf_token %}
-				<input type="hidden" name="slug" value="{{ book.slug }}" >
-				<input type="hidden" name="user" value="{{ request.user.id }}">
-				<input type="hidden" name="comment_id" value="{{ comment.id }}" >
-				<input type="hidden" name="dislike" value="dislike">
-				<button type="submit"  class="btn btn-outline-danger btn-sm">Dislike</button>
-			</form>
-		{% endif %}
+		<form action="{% url 'books:comment_system' %}" method="post">
+			{% csrf_token %}
+			<input type="hidden" name="slug" value="{{ book.slug }}" >
+			<input type="hidden" name="user" value="{{ request.user.id }}">
+			<input type="hidden" name="comment_id" value="{{ comment.id }}" >
+			<input type="hidden" name="dislike" value="dislike">
+			<button type="submit"  class="btn btn-outline-danger btn-sm">Dislike</button>
+		</form>
+	{% endif %}
 
 {% else %}
 	<div class="like-dislike-book" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Please login or register">
-
 		<button type="submit"  class="btn btn-outline-success btn-sm" disabled>Like</button>
-
 		<button type="submit"  class="btn btn-outline-danger btn-sm" disabled>Dislike</button>
-
 	</div>
 {% endif %}

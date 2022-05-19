@@ -1,0 +1,33 @@
+{% extends "books/base.html" %}
+
+{% block content %}
+
+
+<div  style="margin-top: 40px;">
+
+<div style="margin:auto; max-width: 500px; border:dotted;"  class="alert alert-light" role="alert">
+
+{% if messages %}
+  <div class="messages" style="border:dotted; width: 100%;">
+    {% for message in messages %}
+        {% if message.level == 40 %}
+      <div class="alert alert-danger" role="alert">
+        <h4 style="color: blue; text-align: center;" >{{ message }}</h4>
+      </div>
+        {% else %}
+      <div class="alert alert-success" role="alert">
+        <h5 style="color: blue; text-align: center;" >{{ message }}</h5>
+      </div>
+        {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
+    
+
+  </div>
+
+</div>     
+
+
+            
+{% endblock %}

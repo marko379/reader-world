@@ -1,0 +1,76 @@
+
+{% for comment in page %}
+<div class="comment-2" id="comm--{{comment.id}}">
+	<div class="photo-and-details d-flex">
+		<div class="photo">
+			{% if comment.user != None %}
+				<img src="{{comment.user.user_photo.user_img.url}}" width="100"  alt="My image" >
+			{% else %}
+				<img src="/media/default_user_img/user_img.png" width="100"  alt="My image" >
+			{% endif %}
+		</div>
+		<div class="detai">
+			<div class="nam">
+				{% if comment.user != None %}
+					<div><h5 style="color: #00802b">{{comment.user}}</h5></div>
+				{% else %}
+					<div><h5 style="color: red">Anonymous user</h5></div>
+				{% endif %}						
+			</div>
+			<div class="sta">{% include "books/show_stars_on_comment.html" %}</div>
+			<h6 style="color: #b30047">{{comment.date_comment_posted}}</h6>						
+		</div>
+	</div>
+
+	<div class="content" id="comm--{{comment.id}}">
+		{% if comment.user == request.user and update_form.initial.comm_id == comment.id  %}
+      <form action="{{book.get_absolute_url}}#comm--{{comment.id}}" method="post" >
+        <div >
+          {% csrf_token %}
+          {{update_form }}
+          <button type="submit" name="comm_id" value="{{ comment.id }}" class="btn btn-outline-secondary btn-sm">Comment</button>
+        </div>
+      </form>
+      <br>
+    {% else %}
+      <div class="comment-text-area-div" id="comm--{{comment.id}}">
+        <p class="comment-text-area-paragraf">
+        	{% if comment.comment|linebreaksbr|slice:":300"|length < 300  %}
+        		{{comment.comment|linebreaksbr}}
+        	{% else %}
+        		{{comment.comment|linebreaksbr|slice:":300" }}
+          	<span id="dots">...</span>
+          	<span class="more" id="more">{{comment.comment|linebreaksbr|slice:"300:"}}</span>
+          	<br>
+          	<button id="myBtn" class="btn btn-success btn-sm">Read more</button>
+        	{% endif %}
+        </p>
+      </div>
+    {% endif %}
+      <br>
+	</div>
+	<div><h6>{{comment.comment_likes.count}} people like this</h6></div>
+	<div class="item-3">
+		{% if request.user.id == comment.user.id %}
+		<div class="d-flex">
+			<div>{% include "books/delete_comm.html" %} </div>&nbsp;&nbsp;
+			<div id="comm--{{comment.id}}">{% include "books/edit_small_screen.html" %} </div>
+		</div>
+
+		{% else %}
+		<div class="d-flex">
+			<div data-bs-toggle="tooltip" data-bs-placement="bottom" title="user not authenticated">
+				<button type="button" class="btn btn-sm btn-outline-secondary" disabled>Delete</button>
+			</div>&nbsp;&nbsp;
+			<div data-bs-toggle="tooltip" data-bs-placement="bottom" title="user not authenticated">
+				<button type="button" class="btn btn-outline-secondary btn-sm" disabled>Edit</button>
+			</div>
+		</div>
+		{% endif %}
+		<div class="comment_like_dislike">{% include "books/comment_like_dislike.html" %}</div>
+	</div>
+	<hr>
+</div>
+
+
+{% endfor %}

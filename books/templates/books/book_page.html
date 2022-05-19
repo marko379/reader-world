@@ -7,417 +7,222 @@
 <div class="main-content">
 
 {% if messages %}
-	<div class="messages" style="width: 100%;">
-	    {% for message in messages %}
-        	{% if message.level == 40 %}
-				<div class="alert alert-danger" role="alert">
-				  <h4 style="color: blue; margin: auto;" >{{ message }}</h4>
-				</div>
-        	{% else %}
-				<div class="alert alert-success" role="alert">
-				  <h5 style="color: blue; margin: auto;" >{{ message }}</h5>
-				</div>
-       		{% endif %}
-	    {% endfor %}
-    </div>
+  <div class="messages" style="width: 100%;">
+    {% for message in messages %}
+      {% if message.level == 40 %}
+        <div class="alert alert-danger" role="alert">
+          <h4 style="color: blue; margin: auto;" >{{ message }}</h4>
+        </div>
+      {% else %}
+        <div class="alert alert-success" role="alert">
+          <h5 style="color: blue; margin: auto;" >{{ message }}</h5>
+        </div>
+     {% endif %}
+    {% endfor %}
+  </div>
 {% endif %}
 
 	<!-- likes dislikes procentage system -->
-	<div class="progress">
-	  <div class="progress-bar" role="progressbar" style="width: {{book.likes_dislikes_procentage.0}}%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">{{book.likes_dislikes_procentage.0}}% people like this</div>
-	  <div class="progress-bar bg-danger" role="progressbar" style="width: {{book.likes_dislikes_procentage.1}}%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">{{book.likes_dislikes_procentage.1}}%</div>
-	</div>
-	<br>
+<div class="progress">
+  <div class="progress-bar" role="progressbar" style="width: {{book.likes_dislikes_procentage.0}}%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">{{book.likes_dislikes_procentage.0}}% people like this</div>
+  <div class="progress-bar bg-danger" role="progressbar" style="width: {{book.likes_dislikes_procentage.1}}%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">{{book.likes_dislikes_procentage.1}}%</div>
+</div>
+<br>
 
+<!-- this div cover title ,photo,descriptom and carousel -->
+<div class="titlee">
+  <div class="images">
+    <img src="{{book.image.url}}" alt="photo" class="img-thumbnail" width="150">
+    <!-- RATING STAR SYSTEM -->
+    {% include "books/rate_it_stars.html" %}
+    {% include "books/like_dislike_system.html" %}
+  </div>
+  <div class="content" >
+    <a class="download-link" href="{{book.files}} " download>Download-PDF</a>
+    <h4>{{book.title}}</h4>
+    <h6 class="">By {{book.writter}}</h6>
+    <!-- screen 417px -->
+    <div class="star-417px">{% include "books/star.html" %}</div>
+    <!-- Star rating system imported from star.html -->
+    <div class="star-rating-system">
+      {% include "books/star.html" %}
+      <!-- rating_star_system.total.1 = return total num of all users -->
+      <div class="star-rating-system-inside"><p>{{rating_star_system.total.1}}-ratings</p></div>
+      <div class="star-rating-system-inside"><p>{{comment.count}}-comments</p></div>   
+    </div>
+    <div class="all-genres">
+      <div class="all-genres-inside" >
+        {% for gen in book.genres.all %}
+          <a href="{% url  'books:one_genre' gen=gen.genre %}"><p class="font-monospace">{{gen.genre}}</p></a>&nbsp;&nbsp;
+        {% endfor %}
+      </div>
+    </div>
+    <br>
+    <p class="book-info-text">{{book.info}}</p>
+  </div>
+  <!-- carousel  -->
+  {% include "books/carousel.html" %}
+</div>
 
+<!-- Show all books genres and star rating system small screen 417px -->
+{% include "books/show-All-Books-Genres-And-Star-Rating-System-417px-screen.html" %}
+<!-- screen size 620 -->
+<p class="book-info-text-620">{{book.info}}</p>
 
-
-	<div class="titlee">
-		<div class="images">
-			<img src="{{book.image.url}}" alt="photo" class="img-thumbnail" width="150">
-			<!-- RATING STAR SYSTEM -->
-			{% include "books/rate_it_stars.html" %}
-			{% include "books/like_dislike_system.html" %}
-		</div>
-
-		<div class="content">
-			<a class="download-link" href="{{book.files}} " download>Download-PDF</a>
-			<h4>{{book.title}}</h4>
-			<h6 class="">By {{book.writter}}</h6>
-
-			<!-- screen 417px -->
-			<div class="star-417px">{% include "books/star.html" %}</div>
-
-			<!-- Star rating system imported from star.html -->
-			<div class="star-rating-system">
-				{% include "books/star.html" %}
-				<!-- rating_star_system.total.1 = return total num of all users -->
-				<div class="star-rating-system-inside"><p>{{rating_star_system.total.1}}-ratings</p></div>
-				<div class="star-rating-system-inside"><p>{{comment.count}}-comments</p></div>   
-			</div>
-
-
-			<div class="all-genres">
-				<div class="all-genres-inside" >
-					{% for gen in book.genres.all %}
-						<a href="{% url  'books:one_genre' gen=gen.genre %}"><p class="font-monospace">{{gen.genre}}</p></a>&nbsp;&nbsp;
-					{% endfor %}
-				</div>
-			</div>
-
-			<br>
-			<p class="book-info-text">{{book.info}}</p>
-
-		</div>
-
-
-		<div id="carouselExampleInterval" class="carousel slide book-you-might-like" data-bs-ride="carousel">
-			<h5>might like</h5>
-		  <div class="carousel-inner">
-			    <div class="carousel-item active" data-bs-interval="1">
-			      <img class='img-thumbnail image-in-carousel' src="{{book.image.url}}" class="d-block "  >
-			    </div>
-			    {% for books in return_books_by_ganres %}
-			    	{% if not books.slug == book.slug %}
-			    <div class="carousel-item" data-bs-interval="3500">
-			      <a href="{% url 'books:book' slug=books.slug %}"><img class='img-thumbnail image-in-carousel d-block w-100' src="{{books.image.url}}"></a>
-			    </div>
-			    	{% endif %}
-			    {% endfor %}
-		  </div>
-		  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-		    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		    <span class="visually-hidden">Previous</span>
-		  </button>
-		  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-		    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-		    <span class="visually-hidden">Next</span>
-		  </button>
-		</div>
-	</div>
-
-
-
-
-		<div class="star-rating-system-417">
-			<!-- rating_star_system.total.1 = return total num of all users -->
-			<div class="star-rating-system-inside-417" style="color: green; margin: 5px;"><p>{{rating_star_system.total.1}}-ratings</p></div>
-			<div class="star-rating-system-inside-417" style="color: green; margin: 5px;"><p>{{comment.count}}-comments</p></div>   
-	    </div>
-
-
-			<div class="all-genres-2">
-				<div class="all-genres-inside" >
-					{% for gen in book.genres.all %}
-						<a href="{% url  'books:one_genre' gen=gen.genre %}"><p class="font-monospace">{{gen.genre}}</p></a>&nbsp;&nbsp;
-					{% endfor %}
-				</div>
-			</div>
-
-
-
-
-		<!-- screen size 620 -->
-		<p class="book-info-text-620">{{book.info}}</p>
-
-
-<div class="carousel-recently-books-screen">
-    <div id="carouselExampleInterval" class="carousel slide book-you-might-like-2" data-bs-ride="carousel">
-		<h6 style="text-align: center;">like?</h6>
-		  <div class="carousel-inner carousel-inner-2">
-			    <div class="carousel-item carousel-item-2 active" data-bs-interval="1">
-			      <img class='img-thumbnail image-in-carousel' src="{{book.image.url}}" class="d-block "  >
-			    </div>
-			    {% for books in return_books_by_ganres %}
-			    	{% if not books.slug == book.slug %}
-			    <div class="carousel-item carousel-item-2" data-bs-interval="3500">
-			      <a href="{% url 'books:book' slug=books.slug %}"><img class='img-thumbnail image-in-carousel d-block' src="{{books.image.url}}"></a>
-			    </div>
-			    	{% endif %}
-			    {% endfor %}
-		  </div>
-		  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-		    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		    <span class="visually-hidden">Previous</span>
-		  </button>
-		  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-		    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-		    <span class="visually-hidden">Next</span>
-		  </button>
-	</div>
-		<div>
-			<h6 style="text-align: center;">recently viewed</h6>
-			<div class="recently-viewed-books-2">
-				{% for b in recently_viewed_books %}
-					<a href="{% url 'books:book' slug=b.slug %}"><img src="{{b.image.url}}" alt="photo" class=" img-thumbnail recently-viewed-books-2-photos" width="140"></a>
-				{% endfor %}
-							
-			</div>
-		</div>
+<!-- carousel for screen size less then 950px -->
+{% include "books/Carousel-And-Recently-Viewd-Books-screen-950px-And-smaller.html" %}
+ 
+<!-- COMMENT FORM AND RECENTLY VIEWD BOOKS -->
+<div class="comment-form-recently-viewed-books">
+  {% if user.is_authenticated %}
+    <div class="comment-form">
+      <form action="{% url 'books:book' slug=book.slug %}" method="post" >
+        {% csrf_token %}
+        {{form }}
+        <div class="d-grid gap-2">
+          <button name="slug" value="{{ book.slug }}" class="btn btn btn-success btn-sm" type="submit">comment</button>
+        </div>
+      </form>
+    </div>
+  {% else %}
+    <div class="comment-form" data-bs-toggle="tooltip" data-bs-placement="bottom" title="please login or  register to comment">
+      <form>
+        {{form_2}}
+        <div class="d-grid gap-2">
+          <button name="slug" value="{{ book.slug }}" class="btn btn btn-success btn-sm" type="submit" disabled>comment</button>
+        </div>
+      </form>
+    </div>
+  {% endif %}
+    <div class="recently-viewed-books" >
+      {% for b in recently_viewed_books %}
+        <a href="{% url 'books:book' slug=b.slug %}"><img src="{{b.image.url}}" alt="photo"class="img-thumbnail" width="100"></a>
+      {% endfor %}
+      <h6 style="text-align: center;">Recently Viewed</h6>				
+    </div>
 </div>
 
 
-
-
-
-	
-
-		<!-- COMMENT FORM -->
-
-		<div class="comment-form-recently-viewed-books">
-			{% if user.is_authenticated %}
-			<div class="comment-form">
-				<form action="{% url 'books:book' slug=book.slug %}" method="post" >
-					{% csrf_token %}
-					{{form }}
-					<div class="d-grid gap-2">
-  						<button name="slug" value="{{ book.slug }}" class="btn btn btn-success btn-sm" type="submit">comment</button>
-					</div>
-				</form>
-			</div>
-			{% else %}
-			<div class="comment-form" data-bs-toggle="tooltip" data-bs-placement="bottom" title="please login or register to comment">
-				<form>
-					{{form_2}}
-					<div class="d-grid gap-2">
-  						<button name="slug" value="{{ book.slug }}" class="btn btn btn-success btn-sm" type="submit" disabled>comment</button>
-					</div>
-				</form>
-			</div>
-			{% endif %}
-			<div class="recently-viewed-books" >
-				{% for b in recently_viewed_books %}
-					<a href="{% url 'books:book' slug=b.slug %}"><img src="{{b.image.url}}" alt="photo"class="img-thumbnail" width="100"></a>
-				{% endfor %}
-				<h6 style="text-align: center;">Recently Viewed</h6>				
-			</div>
-
-		</div>
-
-
-
-
-
-	<div class="comment" >
-		{% for comment in page %}
-			<hr style="height: 40px; color: black;" id="comm-{{comment.id}}">
-	
-			<div class="main-div-flex-comment">
-
-				<div class="comment-user-photo" >
-					{% if comment.user != None %}
-						<img src="{{comment.user.user_photo.user_img.url}}" width="100"  alt="My image" >
-					{% else %}
-						<img src="/media/default_user_img/user_img.png" width="100"  alt="My image" >
-					{% endif %}
-				</div>
-				
-				<div class="comment-div-grid">
-					<div class="item-1">
-						<div class="d-flex">
-							{% if comment.user != None %}
-								<div><h5 style="color: #00802b">{{comment.user}}</h5></div>&nbsp;&nbsp;
-							{% else %}
-								<div><h5 style="color: red">Anonymous user</h5></div>&nbsp;&nbsp;
-							{% endif %}
-							{% include "books/show_stars_on_comment.html" %}
-						</div>
-						<div class="comment-date"><h6 style="color: #b30047">{{comment.date_comment_posted}}</h6></div>
-					</div>
-					<div>
-            {% if comment.user == request.user and update_form.initial.comm_id == comment.id  %}
-              <form action="{% url 'books:book-comment' slug=book.slug  page_num_update_comment=page.number %}#comm-{{comment.id}}" method="post" >
-                <div>
-                  {% csrf_token %}
-                  {{update_form }}
-				         <button type="submit" name="comm_id" value="{{ comment.id }}" class="btn btn-success btn-sm w-100 d-block">Update</button>
-                </div>
-              </form>
-              <br>
+<!-- Dispaly comments  -->
+<div class="comment" >
+  {% for comment in page %}
+    <hr style="height: 40px; color: black;" id="comm-{{comment.id}}">
+    <div class="main-div-flex-comment">
+      <div class="comment-user-photo" style="border: dotted;">
+        {% if comment.user != None %}
+          <img src="{{comment.user.user_photo.user_img.url}}" width="100"  alt="My image" >
+        {% else %}
+          <img src="/media/default_user_img/user_img.png" width="100"  alt="My image" >
+        {% endif %}
+      </div>
+      <div class="comment-div-grid">
+        <div class="item-1">
+          <div class="d-flex">
+            {% if comment.user != None %}
+              <div>
+                <h5 style="color: #00802b">{{comment.user}}</h5>
+              </div>
+              &nbsp;&nbsp;
             {% else %}
+              <div>
+                <h5 style="color: red">Anonymous user</h5>
+              </div>
+              &nbsp;&nbsp;
+            {% endif %}
+            {% include "books/show_stars_on_comment.html" %}
+          </div>
+          <div class="comment-date">
+            <h6 style="color: #b30047">{{comment.date_comment_posted}}</h6>
+          </div>
+        </div>
+        <div class="no-class-here">
+          {% if comment.user == request.user and update_form.initial.comm_id == comment.id  %}
+            <form action="{% url 'books:book-comment' slug=book.slug  page_num_update_comment=page.number %}#comm-{{comment.id}}" method="post" >
+              <div>
+                {% csrf_token %}
+                {{update_form }}
+                <button type="submit" name="comm_id" value="{{ comment.id }}" class="btn btn-success btn-sm w-100 d-block">Update</button>
+              </div>
+            </form>
+            <br>
+          {% else %}
             <div class="comment-text-area-div">
               <p class="comment-text-area-paragraf">
-              	{% if comment.comment|linebreaksbr|slice:":300"|length < 300  %}
-              		{{comment.comment|linebreaksbr}}
-              	{% else %}
-              		{{comment.comment|linebreaksbr|slice:":300" }}
-                	<span id="dots">...</span>
-                	<span class="more" id="more">{{comment.comment|linebreaksbr|slice:"300:"}}</span>
-                	<br>
-                	<button id="myBtn" class="btn btn-success btn-sm">Read more</button>
-              	{% endif %}
-
+                {% if comment.comment|linebreaksbr|slice:":300"|length < 300  %}
+                  {{comment.comment|linebreaksbr}}
+                {% else %}
+                  {{comment.comment|linebreaksbr|slice:":300" }}
+                  <span id="dots">...</span>
+                  <span class="more" id="more">{{comment.comment|linebreaksbr|slice:"300:"}}</span>
+                  <br>
+                  <button id="myBtn" class="btn btn-success btn-sm">Read more</button>
+                {% endif %}
               </p>
             </div>
-            {% endif %}
-		         <br>
-					</div>
-
-					<div class="item-3">
-
-						{% if request.user.id == comment.user.id %}
-						<div class="d-flex">
-							<div >{% include "books/delete_comm.html" %} </div>&nbsp;&nbsp;
-							<div>{% include "books/edit.html" %} </div>
-						</div>
-
-						{% else %}
-						<div class="d-flex" >
-							<div data-bs-toggle="tooltip" data-bs-placement="bottom" title="user not authenticated">
-								<button type="button" class="btn btn-sm btn-outline-secondary" disabled>Delete</button>
-							</div>&nbsp;&nbsp;
-							<div  data-bs-toggle="tooltip" data-bs-placement="bottom" title="user not authenticated">
-								<button type="button" class="btn btn-outline-secondary btn-sm" disabled>Edit</button>
-							</div>
-						</div>
-						{% endif %}
-
-
-						<div  class="comment_like_dislike">{% include "books/comment_like_dislike.html" %}</div>
-						<div class="comment-likes-count"><h6>{{comment.comment_likes.count}} people like this</h6></div>
-					</div>
-					
-				</div>
-
-			</div>
-		{% endfor %}
-
-
-
-<!-- DEALING WITH PAGES OF COMENTS, SE EVERY PAGE HAS 5 COMMENTS PER PAGE, THESE ARE BUILT IN METHODS OF DJANGO PAGINATION OBJECTS   -->
-
-	<div class="pagination-div">
-			{% if comments.count != 0 %}
-		  	{% if page.has_previous %}
-					<form action="{% url 'books:book' slug=book.slug %}" method="get">
-						<button type="submit" name="page_num" value="{{page.previous_page_number}}" class="btn btn-outline-primary pagination-button">previous</button>
-					</form>
-		    {% endif %}
-
-		    {% for i in comments %}
-		    	{% if page.number == i.number %}
-
-					<form action="{% url 'books:book' slug=book.slug %}" method="get">
-						<button type="submit" name="page_num" value="{{i.number}}" class="btn btn-primary pagination-button">{{i.number}}</button>
-					</form>
-
-			    {% else %}
-					<form action="{% url 'books:book' slug=book.slug %}" method="get">
-						<button type="submit" name="page_num" value="{{i.number}}" class="btn btn-outline-primary pagination-button">{{i.number}}</button>
-					</form>
-			    {% endif %}
-		    {% endfor %}
-
-		  	{% if page.has_next %}
-					<form action="{% url 'books:book' slug=book.slug %}" method="get">
-						<button type="submit" name="page_num" value="{{page.next_page_number}}" class="btn btn-outline-primary pagination-button">next</button>
-					</form>
-		    {% endif %}
-		  {% else %}
-		  	<div><h3>There are not comments yet, be the first one to leave the comment :)</h3></div>
-		  {% endif %}
-
-	</div>
-
-
-	
-		{% for comment in comment %}
-
-		<div class="comment-2" id="comm--{{comment.id}}">
-
-			<div class="photo-and-details d-flex">
-				
-				<div class="photo">
-					{% if comment.user != None %}
-						<img src="{{comment.user.user_photo.user_img.url}}" width="100"  alt="My image" >
-					{% else %}
-						<img src="/media/default_user_img/user_img.png" width="100"  alt="My image" >
-					{% endif %}
-
-				</div>
-				<div class="detai">
-					<div class="nam">
-						{% if comment.user != None %}
-							<div><h5 style="color: #00802b">{{comment.user}}</h5></div>
-						{% else %}
-							<div><h5 style="color: red">Anonymous user</h5></div>
-						{% endif %}
-												
-					</div>
-					<div class="sta">{% include "books/show_stars_on_comment.html" %}</div>
-					<h6 style="color: #b30047">{{comment.date_comment_posted}}</h6>					
-					
-				</div>
-
-			</div>
-
-			<div class="content" id="comm--{{comment.id}}">
- 					{% if comment.user == request.user and update_form.initial.comm_id == comment.id  %}
-			              <form action="{{book.get_absolute_url}}#comm--{{comment.id}}" method="post" >
-			                <div >
-			                  {% csrf_token %}
-			                  {{update_form }}
-			                  <button type="submit" name="comm_id" value="{{ comment.id }}" class="btn btn-outline-secondary btn-sm">Comment</button>
-			                </div>
-			              </form>
-		                <br>
-		              {% else %}
-		              <div class="comment-text-area-div" id="comm--{{comment.id}}">
-		                <p class="comment-text-area-paragraf">
-		                	{% if comment.comment|linebreaksbr|slice:":300"|length < 300  %}
-		                		{{comment.comment|linebreaksbr}}
-		                	{% else %}
-		                		{{comment.comment|linebreaksbr|slice:":300" }}
-			                	<span id="dots">...</span>
-			                	<span class="more" id="more">{{comment.comment|linebreaksbr|slice:"300:"}}</span>
-			                	<br>
-			                	<button id="myBtn" class="btn btn-success btn-sm">Read more</button>
-		                	{% endif %}
-
-		                </p>
-		              </div>
-		              {% endif %}
-              <br>
-			</div>
-
-			<div><h6>{{comment.comment_likes.count}} people like this</h6></div>
-
-
-			<div class="item-3">
-
-						{% if request.user.id == comment.user.id %}
-						<div class="d-flex">
-							<div>{% include "books/delete_comm.html" %} </div>&nbsp;&nbsp;
-							<div id="comm--{{comment.id}}">{% include "books/edit_small_screen.html" %} </div>
-						</div>
-
-						{% else %}
-						<div class="d-flex">
-							<div data-bs-toggle="tooltip" data-bs-placement="bottom" title="user not authenticated">
-								<button type="button" class="btn btn-sm btn-outline-secondary" disabled>Delete</button>
-							</div>&nbsp;&nbsp;
-							<div data-bs-toggle="tooltip" data-bs-placement="bottom" title="user not authenticated">
-								<button type="button" class="btn btn-outline-secondary btn-sm" disabled>Edit</button>
-							</div>
-						</div>
-						{% endif %}
-
-
-						<div class="comment_like_dislike">{% include "books/comment_like_dislike.html" %}</div>
-			</div>
-
-			<hr>
-		</div>
-
-	 
-		{% endfor %}
-
-
-<br>
-<br>
+          {% endif %}
+          <br>
+        </div>
+        <div class="item-3">
+          {% if request.user.id == comment.user.id %}
+            <div class="d-flex">
+              <div >{% include "books/delete_comm.html" %} </div>&nbsp;&nbsp;
+              <div>{% include "books/edit.html" %} </div>
+            </div>
+          {% else %}
+            <div class="d-flex" >
+              <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="user not authenticated">
+                <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Delete</button>
+              </div>
+              &nbsp;&nbsp;
+              <div  data-bs-toggle="tooltip" data-bs-placement="bottom" title="user not authenticated">
+                <button type="button" class="btn btn-outline-secondary btn-sm" disabled>Edit</button>
+              </div>
+            </div>
+          {% endif %}
+            <div  class="comment_like_dislike">{% include "books/comment_like_dislike.html" %}</div>
+            <div class="comment-likes-count"><h6>{{comment.comment_likes.count}} people like this</h6></div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
 </div>
 
+<!-- script for comments on smaler screen than 620px -->
+{% include "books/comments-small-screen-620px.html" %}
 
+<!-- DEALING WITH PAGES OF COMENTS, SE EVERY PAGE HAS 5 COMMENTS PER PAGE, THESE ARE BUILT IN METHODS OF DJANGO PAGINATION OBJECTS   -->
+<div class="pagination-div">
+	{% if comments.count != 0 %}
+	  	{% if page.has_previous %}
+				<form action="{% url 'books:book' slug=book.slug %}" method="get">
+					<button type="submit" name="page_num" value="{{page.previous_page_number}}" class="btn btn-outline-primary pagination-button">previous</button>
+				</form>
+	    {% endif %}
+      {% for i in comments %}
+      	{% if page.number == i.number %}
+
+  			<form action="{% url 'books:book' slug=book.slug %}" method="get">
+  				<button type="submit" name="page_num" value="{{i.number}}" class="btn btn-primary pagination-button">{{i.number}}</button>
+  			</form>
+
+  	    {% else %}
+  			<form action="{% url 'books:book' slug=book.slug %}" method="get">
+  				<button type="submit" name="page_num" value="{{i.number}}" class="btn btn-outline-primary pagination-button">{{i.number}}</button>
+  			</form>
+  	    {% endif %}
+    {% endfor %}
+  	{% if page.has_next %}
+			<form action="{% url 'books:book' slug=book.slug %}" method="get">
+				<button type="submit" name="page_num" value="{{page.next_page_number}}" class="btn btn-outline-primary pagination-button">next</button>
+			</form>
+    {% endif %}
+	{% else %}
+	  <div><h3>There are not comments yet, be the first one to leave the comment :)</h3></div>
+	{% endif %}
+</div>
+
+<!-- div of very first main div  -->
+</div>
 
 <script type="text/javascript">
 	

@@ -7,18 +7,18 @@
 
 {% if messages %}
 	<div class="messages">
-	    {% for message in messages %}
-        	{% if message.level == 40 %}
-				<div class="alert alert-danger" role="alert">
-				  <h4 style="color: blue; margin: auto;" >{{ message }}</h4>
-				</div>
-        	{% else %}
-				<div class="alert alert-success" role="alert">
-				  <h5 style="color: blue; margin: auto;" >{{ message }}</h5>
-				</div>
-       		{% endif %}
-	    {% endfor %}
-    </div>
+    {% for message in messages %}
+      	{% if message.level == 40 %}
+  		<div class="alert alert-danger" role="alert">
+  		  <h4 style="color: blue; margin: auto;" >{{ message }}</h4>
+  		</div>
+      	{% else %}
+  		<div class="alert alert-success" role="alert">
+  		  <h5 style="color: blue; margin: auto;" >{{ message }}</h5>
+  		</div>
+     		{% endif %}
+    {% endfor %}
+  </div>
 {% endif %}
 
 
@@ -35,7 +35,6 @@
 		</h5> </div>
     </div>
   </div>
- 
 </div>
 
 
@@ -46,11 +45,8 @@
 </div>
 
 <div class="main-download">
-
 	<div class="download-books">
-
 		{% for books in book %}
-
 			<span class="d-inline-block" tabindex="0" data-bs-html="true" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="
 
 			<div class='data-title-writer'>
@@ -96,16 +92,18 @@
 					<div>{{books.comments_set.all.count}} comments</div>
 
 			</div>
-			<h6>{{books.info }}</h6>
+			<h6 class='data-book-info'>{{books.info }}</h6>
 			">		
-		
-			<!-- <div class="exe"> -->
- 				<a href="{% url 'books:book' slug=books.slug %}"><img src="{{books.image.url}}" class="img-thumbnail img-front-page" width=""></a></span>
- 			<!-- </div> -->
- 
+			<a href="{% url 'books:book' slug=books.slug %}"><img src="{{books.image.url}}" class="img-thumbnail img-front-page" width=""></a></span>
 		{% endfor %}
-
 	</div>
+
+  <div class="download-books-screen-417px">
+    {% for books in book %}  
+      <a href="{% url 'books:book' slug=books.slug %}"><img src="{{books.image.url}}" class="img-thumbnail img-front-page" width=""></a></span>  
+    {% endfor %}
+  </div>
+
 
 	<div class="genres" >
 		<form method="post" action="{% url 'books:books_by_ganres' %}"> 
@@ -126,8 +124,6 @@
 	<div class="genres-column" >
 		<form method="post" action="{% url 'books:books_by_ganres' %}"> 
 			{% for gen in gen %}
-
-
 				<div class="form-check-inline">
 					<input class="form-check-input" type="checkbox" name="value" value="{{ gen }}" id="flexCheckDefault">
 				    <label class="form-check-label " for="flexCheckDefault">
@@ -140,8 +136,6 @@
   				<button class="btn btn btn-success btn-sm" type="submit">Search books by genre</button>
 		</form>
 	</div>
-
-
 </div>
 
 

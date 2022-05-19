@@ -2,7 +2,7 @@
 .info{
 
 	max-width: 500px;
-	border: double;
+	/*border: double;*/
 	margin: auto;
 	margin-top: 20px;
 
@@ -22,7 +22,7 @@
 	width: 65%;
 	margin:auto;
 	/*text-align: center;*/
-	border: dotted;
+	/*border: dotted;*/
 }
 
 p{
@@ -32,7 +32,7 @@ p{
 .download-title{
 	margin: auto;
 	width: 65%;
-	border: double;
+	/*border: double;*/
 	margin-top: 20px;
 	background-color: rgb(244, 241, 234);
 }
@@ -108,7 +108,7 @@ img{
 }
 
 .exe{
-	border: solid;
+	/*border: solid;*/
 	margin: 10px;
 
 }
@@ -131,9 +131,17 @@ img{
 }
 
 .img-front-page{
-	border: solid;
+	/*border: solid;*/
 	margin: 5px;
   width: 135px;
+}
+
+
+
+
+
+.download-books-screen-417px{
+	display: none;
 }
 
 
@@ -143,14 +151,14 @@ img{
     flex-direction: column;
     justify-content: flex-start;
     margin: auto;
-    border: dotted;
+    /*border: dotted;*/
     width: 100%;
   }
   .download-books{
 	display: flex;
 	/*align-content: space-around;*/
 	 flex-wrap: wrap;
-	 border: solid;
+	 /*border: solid;*/
 	 justify-content: space-around;
 
   }
@@ -187,14 +195,14 @@ img{
     flex-direction: column;
     justify-content: flex-start;
     margin: auto;
-    border: dotted;
+    /*border: dotted;*/
     width: 100%;
   }
   .download-books{
 	display: flex;
 	/*align-content: space-around;*/
 	 flex-wrap: wrap;
-	 border: solid;
+	 /*border: solid;*/
 	 justify-content: space-around;
 
   }
@@ -232,14 +240,14 @@ img{
     flex-direction: column;
     justify-content: flex-start;
     margin: auto;
-    border: dotted;
+    /*border: dotted;*/
     width: 100%;
   }
   .download-books{
 	display: flex;
 	/*align-content: space-around;*/
 	 flex-wrap: wrap;
-	 border: solid;
+	 /*border: solid;*/
 	 justify-content: flex-start;
 
   }
@@ -275,14 +283,14 @@ img{
     flex-direction: column;
     justify-content: flex-start;
     margin: auto;
-    border: dotted;
+    /*border: dotted;*/
     width: 100%;
   }
   .download-books{
 	display: flex;
 	/*align-content: space-around;*/
 	 flex-wrap: wrap;
-	 border: solid;
+	 /*border: solid;*/
 	 justify-content: space-around;
   }
   .genres-column{
@@ -321,14 +329,7 @@ img{
     /*border: dotted;*/
     width: 100%;
   }
-  .download-books{
-	display: flex;
-	/*align-content: space-around;*/
-	 flex-wrap: wrap;
-
-	 justify-content: center;
-
-  }
+  
   .genres-column{
 
   	margin: auto;
@@ -351,15 +352,25 @@ img{
 
 
 .img-front-page{
-	border: dotted;
+	/*border: dotted;*/
 	margin-top: 20px;
-	/*margin-left: 20px;*/
+	margin-left: 30px;
 }
 
+.download-books{
+	display: none;
+}
+
+.download-books-screen-417px{
+	display: block;
 }
 
 
-@media screen and (max-width: 397px) {
+
+}
+
+
+@media screen and (max-width: 364px) {
   .main-download {
     display: flex;
     flex-direction: column;
@@ -374,10 +385,16 @@ img{
 	/*align-content: space-around;*/
 	 flex-wrap: wrap;
 	 width: 100%;
+	 display: none;
 
-	/* justify-content: center;*/
 
   }
+
+
+
+.download-books-screen-417px{
+	display: block;
+}
   .genres-column{
 
   	margin: auto;
@@ -402,7 +419,59 @@ img{
 
 
 .img-front-page{
-	border: dotted red;
+	/*border: dotted red;*/
+	/*margin-top: 20px;*/
+
+}
+
+}
+
+
+
+@media screen and (max-width: 363px) {
+  .main-download {
+    display: flex;
+    flex-direction: column;
+    /*justify-content: flex-end;*/
+    margin: auto;
+    /*border: dotted;*/
+    width: 100%;
+  }
+
+  .download-books{
+	 display: none;
+
+
+  }
+
+.download-books-screen-417px{
+	display: block;
+}
+  .genres-column{
+
+  	margin: auto;
+  	width: 90%;
+
+  }
+  .genres{
+  	display: none;
+  }
+  .form-check-inline {
+  	margin: auto;
+  	width: 45%;	
+  	/*border: dashed;*/
+
+  }
+  .download-title{
+  	width: 100%;
+  }
+  .img-front-page{
+  	width: 120px;
+  }
+
+
+.img-front-page{
+	/*border: dotted red;*/
 	/*margin-top: 20px;*/
 
 }
