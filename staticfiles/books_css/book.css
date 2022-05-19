@@ -283,7 +283,7 @@ p{
 	display: none;
 }
 
-.star-rating-system-417{
+.star-rating-system-screen-417px{
 	display: none;
 }
 
@@ -301,12 +301,12 @@ p{
 }
 
 
-.carousel-recently-books-screen{
+.CarouselAndRecentlyViewdBooks-screen950pxAndLess{
 	display: none;
 }
 
 @media screen and (max-width: 950px) {
-.carousel-recently-books-screen{
+.CarouselAndRecentlyViewdBooks-screen950pxAndLess{
 	display: flex;
 	/*border: solid;*/
 	justify-content: space-between;
@@ -382,7 +382,7 @@ p{
 
 
 @media screen and (max-width: 620px) {
-.carousel-recently-books-screen{
+.CarouselAndRecentlyViewdBooks-screen950pxAndLess{
 	/*display: none;*/
 	display: flex;
 	/*border: solid;*/
@@ -423,6 +423,7 @@ p{
  
  .comment-2{
  	display: block;
+ 	margin-top: 20px;
  }
   .content{
   	width: 95%;
@@ -445,7 +446,7 @@ p{
 
 
 @media screen and (max-width: 431px) {
-.carousel-recently-books-screen{
+.CarouselAndRecentlyViewdBooks-screen950pxAndLess{
 
 	display: flex;
 	justify-content: space-between;
@@ -457,7 +458,7 @@ p{
  }
  
  .comment-2{
- 	display: inline;
+ 	display: block;
  }
 
 
@@ -466,6 +467,7 @@ p{
   }
 
 	.all-genres-2{
+		/*border: dotted;*/
 		display: flex;
 		justify-content: center;
 		/*border: dotted;*/
@@ -485,9 +487,11 @@ p{
   	flex-wrap: wrap;
 
   }
-  .star-rating-system-417{
+  .star-rating-system-screen-417px{
 	display: flex;
 	justify-content: space-around;
   }
+
+
 
 }
