@@ -60,7 +60,7 @@
               </form>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{% url 'users:register-url' %}">New around here? Sign up</a>
-            <a class="dropdown-item" href="#">Forgot password?</a>
+            <a class="dropdown-item" href="{% url 'pass-reset' %}">Forgot password or username?</a>
           </div>
         </div>
       {% endif %}
@@ -71,7 +71,7 @@
             <input class="btn btn-success" type="submit" id="button-addon2"></input>
         </form> 
       </div>
-      <a href="{% url 'books:front' %}"><img src="{% static 'icons/logo-small.png' %}"  alt="My image"></a>
+      <a href="{% url 'home' %}"><img src="{% static 'icons/logo-small.png' %}"  alt="My image"></a>
     </div>
   </nav>
 </div>

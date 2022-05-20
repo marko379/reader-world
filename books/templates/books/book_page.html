@@ -108,7 +108,7 @@
   {% for comment in page %}
     <hr style="height: 40px; color: black;" id="comm-{{comment.id}}">
     <div class="main-div-flex-comment">
-      <div class="comment-user-photo" style="border: dotted;">
+      <div class="comment-user-photo">
         {% if comment.user != None %}
           <img src="{{comment.user.user_photo.user_img.url}}" width="100"  alt="My image" >
         {% else %}
@@ -221,7 +221,6 @@
 	{% endif %}
 </div>
 
-<!-- div of very first main div  -->
 </div>
 
 <script type="text/javascript">

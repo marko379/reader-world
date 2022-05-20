@@ -7,10 +7,8 @@ from django.contrib.auth import views as auth_views
 app_name = 'books'
 
 urlpatterns = [
-	path('v/',views.vezba,name='vezba'),
-	path('v_2/',views.vezba_2, name='vezba_22'),
 
-	path('front-page/',views.front,name='front'),
+
 	path('books-by-genres/',views.return_books_by_ganres,name='books_by_ganres'),
 	path('comment-rating-system/',views.comment_like_dislike_system,name='comment_system'),
 	path('book-rating-system/',views.book_like_dislike_system,name='system'),
@@ -24,5 +22,3 @@ urlpatterns = [
 	path('book/<slug:slug>/',views.book, name='book'),
 
 ]
-# if settings.DEBUG:
-#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

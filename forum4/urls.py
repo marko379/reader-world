@@ -27,7 +27,7 @@ app_name = 'forum4'
 
 
 urlpatterns = [
-    path('',views.homito, name='h'),
+    path('',views.homePageView, name='home'),
     path('admin/', admin.site.urls),
     path('reader-world/', include('books.urls')),
     path('accounts/', include('users.urls')),
