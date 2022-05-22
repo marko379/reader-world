@@ -1,0 +1,68 @@
+.main-div{
+	margin: 0 auto;
+	max-width: 1000px;
+
+}
+
+.div-stars{
+	display: grid;
+	margin-right:  5px;
+	grid-template-columns: auto auto;
+	grid-gap: 0.5em;
+}
+
+.book-div{
+	display: flex;
+
+}
+
+.photo-div{
+	max-width:127px;
+	min-width:127px;
+	margin-right: 5px;
+}
+
+.main-div-stars{
+	display: flex;
+}
+
+.star-vertical-aling{
+	vertical-align: top;
+}
+
+.info-div{
+	width: 100%;
+}
+
+.x{
+	margin: auto;
+	border: dotted;
+	margin: 0 auto;
+}
+
+.one-genre-search{
+	display: flex;
+}
+
+hr{
+	height: 20px;
+}
+
+
+
+
+
+
+/* BOOK_BY_ONE_GENRE CSS */
+.download-link-one-genre-search{
+  background-color: #f44336;
+  color: white;
+  padding: 7px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.title-download-div{
+	display: flex;
+}
