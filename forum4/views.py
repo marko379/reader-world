@@ -17,6 +17,8 @@ def homePageView(request):
 	if ( 'session' in request.session):
 		username = request.session['username']
 		messages.success(request, 'Wellcome {}! Your are logged in!'.format(username))
+	if ( 'update_profile_session' in request.session):
+		messages.success(request, 'Your profile is updated successfully!')
 	gen = Genres.objects.all()
 	# get all books by likes, book with most likes is first ...
 	book = Book.objects.annotate(num_authors=Count('likes')).order_by('-num_authors')

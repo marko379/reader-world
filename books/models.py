@@ -5,6 +5,7 @@ from PIL import Image
 from django.urls import reverse
 
 
+
 class Genres(models.Model):
 	genre = models.CharField(max_length=30)
 
@@ -40,11 +41,11 @@ class Book(models.Model):
 	def save(self):
 		self.slugify_title()
 		super().save() # this will execute and save everything above
-		img = Image.open(self.image)
-		SIZE= 298, 450
-		# SIZE= 200, 200
-		new_image= img.resize(SIZE, Image.ANTIALIAS)
-		new_image.save(self.image.path)
+		# img = Image.open(self.image)
+		# SIZE= 298, 450
+		# # SIZE= 200, 200
+		# new_image= img.resize(SIZE, Image.ANTIALIAS)
+		# new_image.save(self.image.path)
 
 	# 
 	@property

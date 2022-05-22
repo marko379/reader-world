@@ -12,7 +12,13 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
+import django_on_heroku
+# from storages.backends.s3boto3 import S3Boto3Storage
+# import django_heroku
+# from storages.backends.s3boto import S3BotoStorage
+# from storages.backends.s3boto3 import S3Boto3Storage
+# import storages
+
 
 if 'DATABASE_URL' in os.environ:
     import dj_database_url
@@ -32,7 +38,7 @@ SECRET_KEY = os.environ.get('db_pass')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1' ,'reader-world.herokuapp.com']
 
@@ -48,13 +54,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crispy_forms',
+    'storages',
+    'crispy_forms'
 
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',    ########### NEW #####################
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',    ########### NEW #####################
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -151,15 +158,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 
-
-
-
-
-
-
-
-
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
+django_on_heroku.settings(locals())
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True  
@@ -167,3 +167,21 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = os.environ.get('HOST_EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('HOST_EMAIL_PASSWORD')
 EMAIL_PORT = 587
+
+AWS_ACCESS_KEY_ID =  os.environ.get('AWS_ACCESS_KEY_ID')
+
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+
+AWS_S3_REGION_NAME = 'eu-west-2'
+
+AWS_S3_ADDRESSING_STYLE = 'virtual'
+
+AWS_S3_SIGNATURE_VERSION = 's3v4'

@@ -120,7 +120,8 @@ def edit_profile(request):
 	if request.method == 'POST':
 		f = Update_user(request.POST)
 		if request.FILES:
-			delete_user_photo = user.user_photo.user_img.path
+			# i am using here name word instead of path coz of s3 bucket
+			delete_user_photo = user.user_photo.user_img.name
 			fs = FileSystemStorage()
 			fs.delete(delete_user_photo)
 		updatePhoto = User_photo_form( request.POST,request.FILES,instance=request.user.user_photo)
@@ -132,7 +133,6 @@ def edit_profile(request):
 		user = User.objects.filter(id=request.user.id).update(last_name=last,first_name=first,email=email)
 		updatePhoto.save()
 		request.session['update_profile_session'] = 'update_profile_session'
-		
 	return redirect('home')
 	
 def delete_user_profile(request):
