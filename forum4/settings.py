@@ -38,7 +38,7 @@ SECRET_KEY = os.environ.get('db_pass')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1' ,'reader-world.herokuapp.com']
 
@@ -161,7 +161,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # django_heroku.settings(locals())
 django_on_heroku.settings(locals())
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True  
 EMAIL_HOST = 'smtp.gmail.com'  
 EMAIL_HOST_USER = os.environ.get('HOST_EMAIL_USER')
@@ -190,4 +190,4 @@ AWS_S3_ADDRESSING_STYLE = 'virtual'
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 
 
-
+print(EMAIL_HOST_USER)
