@@ -58,7 +58,7 @@
       </div>
     </div>
     <br>
-    <p class="book-info-text">{{book.info}}</p>
+    <div style="max-width: 570px;"><p class="book-info-text" style="word-wrap:break-word;">{{book.info|wordwrap:10}}</p></div>
   </div>
   <!-- carousel  -->
   {% include "books/carousel.html" %}
@@ -67,7 +67,7 @@
 <!-- Show all books genres and star rating system small screen 417px -->
 {% include "books/show-All-Books-Genres-And-Star-Rating-System-417px-screen.html" %}
 <!-- screen size 620 -->
-<p class="book-info-text-620">{{book.info}}</p>
+<p class="book-info-text-620" style="word-wrap:break-word;">{{book.info}}</p>
 
 <!-- carousel for screen size less then 950px -->
 {% include "books/Carousel-And-Recently-Viewd-Books-screen-950px-And-smaller.html" %}
