@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+EMAIL_USE_TLS = True 
 from pathlib import Path
 import os
 import django_on_heroku
@@ -160,7 +160,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # django_heroku.settings(locals())
 django_on_heroku.settings(locals())
-
+EMAIL_USE_TLS = True 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True  
 EMAIL_HOST = 'smtp.gmail.com'  
@@ -190,5 +190,5 @@ AWS_S3_ADDRESSING_STYLE = 'virtual'
 
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 
-
+EMAIL_USE_TLS = True 
 print(EMAIL_HOST_PASSWORD)
