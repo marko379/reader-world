@@ -10,10 +10,10 @@ def homePageView(request):
 	# you created simply string form_message and request.session['form_message'] is simply how u create new session
 	# because you creted it (form_message)  in register.views thats is in user app , seesion is created and saved over there, then after user is singed in succsefully page reload and user is sent to front page over here, becuse you saved session (form_message)  before you reloaded the page to here u are able to accsess it over here 
 	username = None
-	if( 'form_message' in request.session):
-		username = request.session['username']
-		messages.success(request, 'Wellcome {}! Before you CAN login you need to confirm your email address! please go to your email and conirm your addres'.format(username))
-		request.session.clear()
+	# if( 'form_message' in request.session):
+	# 	username = request.session['username']
+	# 	messages.success(request, 'Wellcome {}! Before you CAN login you need to confirm your email address! please go to your email and conirm your addres'.format(username))
+	# 	request.session.clear()
 	if ( 'session' in request.session):
 		username = request.session['username']
 		messages.success(request, 'Wellcome {}! Your are logged in!'.format(username))
