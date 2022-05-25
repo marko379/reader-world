@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 from pathlib import Path
 import os
-from os import environ
 import django_on_heroku
 # from storages.backends.s3boto3 import S3Boto3Storage
 # import django_heroku
@@ -164,18 +163,14 @@ django_on_heroku.settings(locals())
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True  
 EMAIL_HOST = 'smtp.gmail.com'  
-# EMAIL_HOST_USER = os.environ.get('HOST_EMAIL_USER')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 # EMAIL_HOST_USER = 'markogojkovic045@gmail.com'
-# EMAIL_HOST_PASSWORD = os.environ.get('HOST_EMAIL_PASSWORD')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 # EMAIL_HOST_PASSWORD = '1Blejkara2@'
 EMAIL_PORT = 587
 
 
-
-EMAIL_HOST_USER = os.environ['HOST_EMAIL_USER']
-
-EMAIL_HOST_PASSWORD = os.environ['HOST_EMAIL_PASSWORD']
-
+print(EMAIL_HOST_PASSWORD)
 
 
 AWS_ACCESS_KEY_ID =  os.environ.get('AWS_ACCESS_KEY_ID')
@@ -186,8 +181,6 @@ AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 
 DEFAULT_FROM_EMAIL = os.environ.get('HOST_EMAIL_USER')
 
-
-print(EMAIL_HOST_USER)
 
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
