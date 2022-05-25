@@ -163,8 +163,10 @@ django_on_heroku.settings(locals())
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True  
 EMAIL_HOST = 'smtp.gmail.com'  
-EMAIL_HOST_USER = os.environ.get('HOST_EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('HOST_EMAIL_PASSWORD')
+# EMAIL_HOST_USER = os.environ.get('HOST_EMAIL_USER')
+EMAIL_HOST_USER = 'markogojkovic045@gmail.com'
+# EMAIL_HOST_PASSWORD = os.environ.get('HOST_EMAIL_PASSWORD')
+EMAIL_HOST_PASSWORD = '1Blejkara2@'
 EMAIL_PORT = 587
 
 AWS_ACCESS_KEY_ID =  os.environ.get('AWS_ACCESS_KEY_ID')
@@ -189,3 +191,5 @@ AWS_S3_ADDRESSING_STYLE = 'virtual'
 
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 
+
+print(EMAIL_HOST_USER)
