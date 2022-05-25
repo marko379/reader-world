@@ -9,14 +9,10 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+
 from pathlib import Path
 import os
 import django_on_heroku
-# from storages.backends.s3boto3 import S3Boto3Storage
-# import django_heroku
-# from storages.backends.s3boto import S3BotoStorage
-# from storages.backends.s3boto3 import S3Boto3Storage
-# import storages
 
 
 if 'DATABASE_URL' in os.environ:
@@ -164,13 +160,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True  
 EMAIL_HOST = 'smtp.gmail.com'  
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-# EMAIL_HOST_USER = 'markogojkovic045@gmail.com'
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-# EMAIL_HOST_PASSWORD = '1Blejkara2@'
 EMAIL_PORT = 587
 
 
-print(EMAIL_HOST_PASSWORD)
 
 
 AWS_ACCESS_KEY_ID =  os.environ.get('AWS_ACCESS_KEY_ID')
@@ -192,6 +185,5 @@ AWS_S3_REGION_NAME = 'eu-west-2'
 AWS_S3_ADDRESSING_STYLE = 'virtual'
 
 AWS_S3_SIGNATURE_VERSION = 's3v4'
-
 
 
