@@ -29,7 +29,7 @@ app_name = 'forum4'
 urlpatterns = [
     path('',views.homePageView, name='home'),
     path('admin/', admin.site.urls),
-    path('reader-world/', include('books.urls')),
+    path('', include('books.urls')),
     path('accounts/', include('users.urls')),
     
 

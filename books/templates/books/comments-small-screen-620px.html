@@ -1,7 +1,7 @@
 
 {% for comment in page %}
-<div class="comment-2" id="comm--{{comment.id}}">
-	<div class="photo-and-details d-flex">
+<div class="comment-2" >
+	<div class="photo-and-details d-flex" id="comm--{{comment.id}}">
 		<div class="photo">
 			{% if comment.user != None %}
 				<img src="{{comment.user.user_photo.user_img.url}}" width="100"  alt="My image" >
@@ -22,18 +22,18 @@
 		</div>
 	</div>
 
-	<div class="content" id="comm--{{comment.id}}">
+	<div class="content" id="xxx">
 		{% if comment.user == request.user and update_form.initial.comm_id == comment.id  %}
-      <form action="{{book.get_absolute_url}}#comm--{{comment.id}}" method="post" >
+      <form action="{% url 'books:book-comment' slug=book.slug  page_num_update_comment=page.number %}#comm--{{comment.id}}" method="post" >
         <div >
           {% csrf_token %}
           {{update_form }}
-          <button type="submit" name="comm_id" value="{{ comment.id }}" class="btn btn-outline-secondary btn-sm">Comment</button>
+          <button type="submit" name="comm_id" value="{{comment.id}}" class="btn btn-outline-secondary btn-sm">Comment</button>
         </div>
       </form>
       <br>
     {% else %}
-      <div class="comment-text-area-div" id="comm--{{comment.id}}">
+      <div class="comment-text-area-div" id="xxx">
         <p class="comment-text-area-paragraf">
         	{% if comment.comment|linebreaksbr|slice:":300"|length < 300  %}
         		{{comment.comment|linebreaksbr}}
@@ -54,7 +54,7 @@
 		{% if request.user.id == comment.user.id %}
 		<div class="d-flex">
 			<div>{% include "books/delete_comm.html" %} </div>&nbsp;&nbsp;
-			<div id="comm--{{comment.id}}">{% include "books/edit_small_screen.html" %} </div>
+			<div>{% include "books/edit_small_screen.html" %}</div>
 		</div>
 
 		{% else %}
@@ -71,6 +71,4 @@
 	</div>
 	<hr>
 </div>
-
-
 {% endfor %}

@@ -87,7 +87,8 @@ def book(request,slug,page_num_update_comment=1):
 	else:
 		form = Comment_form()
 		form_2 = Comment_form_disabled()
-	return render(request,'books/book_page.html',{
+	return render(request,'books/book_page.html',
+		{
 		'book':book,
 		'form':form,
 		'return_books_by_ganres':return_books_by_ganres,

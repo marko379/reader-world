@@ -3,6 +3,29 @@
 SECRET_KEY needs to be updated  heroku config:set SECRET_KEY=''
 
 
+small http://127.0.0.1:8000/reader-world/book/married-with-zombies-10/?comm_idx=245&page_num=3#comm-245
+
+bigg  http://127.0.0.1:8000/reader-world/book/married-with-zombies-10/?comm_idx=245&page_num=3#comm-245
+
+
+
+<form action="{{book.get_absolute_url}}#comm--{{comment.id}}" method="get" class="form">
+   {% csrf_token %} 
+  <button type="submit" name="comm_idx" value="{{comment.id}}" class="btn btn-outline-warning btn-sm">Edit</button>
+</form>
+
+
+ <form action="{{book.get_absolute_url}}#comm-{{comment.id}}" method="post" >
+        <div >
+          {% csrf_token %}
+          {{update_form }}
+          <button type="submit" name="comm_id" value="{{comment.id}}" class="btn btn-outline-secondary btn-sm">Comment</button>
+        </div>
+      </form>
+
+
+
+
 # def front(request):
   # request.session['form_message'] = "form_message" and request.session['username'] = form.instance.username are  made in user app in register.views
   # remember this is how u create session request.session['form_message'] = "form_message"
