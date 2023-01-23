@@ -35,7 +35,7 @@ SECRET_KEY = os.environ.get('db_pass')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1' ,'reader-world.herokuapp.com','web-production-3326.up.railway.app']
+ALLOWED_HOSTS = ['127.0.0.1' ,'reader-world.herokuapp.com','web-production-3326.up.railway.app','reader-world-production.up.railway.app']
 
 
 # Application definition
