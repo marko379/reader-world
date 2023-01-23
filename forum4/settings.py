@@ -41,8 +41,8 @@ ALLOWED_HOSTS = ['127.0.0.1' ,'reader-world.herokuapp.com','web-production-3326.
 # Application definition
 
 INSTALLED_APPS = [
-    #'books.apps.BooksConfig',
-    #'users.apps.UsersConfig',
+    'books.apps.BooksConfig',
+    'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,8 +51,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'storages',
     'crispy_forms',
-    'books',
-    'users'
+    #'books',
+    #'users'
 
 ]
 
